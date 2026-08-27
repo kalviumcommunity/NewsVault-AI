@@ -6,4 +6,11 @@ def get_connection():
     if not DATABASE_URL:
         raise ValueError("DATABASE_URL is not configured.")
 
-    return psycopg2.connect(DATABASE_URL)
+    try:
+        connection = psycopg2.connect(DATABASE_URL)
+        return connection
+
+    except psycopg2.Error as error:
+        raise ConnectionError(
+            f"Failed to connect to PostgreSQL: {error}"
+        )
