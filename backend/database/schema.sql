@@ -1,3 +1,5 @@
+CREATE EXTENSION IF NOT EXISTS vector;
+
 CREATE TABLE documents (
     id SERIAL PRIMARY KEY,
     title VARCHAR(255) NOT NULL,
@@ -15,8 +17,9 @@ CREATE TABLE chunks (
     document_id INTEGER NOT NULL,
     chunk_index INTEGER NOT NULL,
     content TEXT NOT NULL,
-    page_start INTEGER,
+    page_start INTEGER, 
     page_end INTEGER,
+    embedding vector(768),
     created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
 
     CONSTRAINT fk_chunks_document
