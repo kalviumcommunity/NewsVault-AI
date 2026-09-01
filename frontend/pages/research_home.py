@@ -49,7 +49,5 @@ def render_research_home():
 
     if search_clicked and question.strip():
         st.session_state["search_query"] = question
-        try:
-            st.switch_page("pages/research_results.py")
-        except Exception:
-            st.info(f"Searching for: {question}")
+        st.session_state["current_page"] = "results"
+        st.rerun()
