@@ -3,3 +3,4 @@ psycopg2-binary
 feature/gemini-ai-setup
 google-genai
 streamlit==1.50.0
+openai
