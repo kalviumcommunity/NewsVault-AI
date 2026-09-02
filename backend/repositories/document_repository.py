@@ -1,13 +1,16 @@
+from datetime import date
+from typing import Optional
+
 from backend.database.connection import get_connection
 
 
 def create_document(
-    title,
-    filename,
-    document_type,
-    author=None,
-    document_date=None,
-    topic=None
+    title:str,
+    filename:str,
+    document_type:str,
+    author:Optional[str]=None,
+    document_date:Optional[date]=None,
+    topic:Optional[str]=None
 ):
     connection = get_connection()
 
@@ -43,7 +46,7 @@ def create_document(
         connection.close()
 
 
-def get_document(document_id):
+def get_document(document_id: int):
     connection = get_connection()
 
     try:
@@ -68,4 +71,5 @@ def get_document(document_id):
             return cursor.fetchone()
 
     finally:
+        cursor.close()
         connection.close()
