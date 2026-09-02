@@ -1,8 +1,9 @@
-from services.ai_service import generate_response
+from services.ai_service import embed_query
 
-response = generate_response(
-    "Say hello to NewsVault AI in one short sentence."
-)
+question = "What was India's economic growth in 2025?"
 
-print("Gemini response:")
-print(response)
+embedding = embed_query(question)
+
+print("Query embedding generated successfully!")
+print("Embedding dimension:", len(embedding))
+print("First 5 values:", embedding[:5])

@@ -27,3 +27,19 @@ def generate_response(prompt: str) -> str:
     )
 
     return response.text
+
+
+def embed_query(question: str) -> list[float]:
+    """
+    Convert a user question into a 768-dimensional embedding
+    using Gemini Embedding 2.
+    """
+    response = client.models.embed_content(
+        model="gemini-embedding-2",
+        contents=question,
+        config={
+            "output_dimensionality": 768
+        }
+    )
+
+    return response.embeddings[0].values
