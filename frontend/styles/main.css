@@ -48,7 +48,7 @@ header[data-testid="stHeader"] {
 }
 
 /* =========================================================
-   SIDEBAR
+   SIDEBAR — PERMANENTLY VISIBLE & FIXED
 ========================================================= */
 
 section[data-testid="stSidebar"] {
@@ -57,15 +57,32 @@ section[data-testid="stSidebar"] {
     min-width: 240px !important;
     max-width: 240px !important;
     border-right: none !important;
+    display: block !important;
+    visibility: visible !important;
+    position: fixed !important;
+    top: 0 !important;
+    left: 0 !important;
+    height: 100vh !important;
+    z-index: 99999 !important;
+    transform: none !important;
+    margin-left: 0 !important;
 }
 
-section[data-testid="stSidebar"]>div {
+section[data-testid="stSidebar"] > div {
     background: #0F172A !important;
     padding: 0 !important;
+    height: 100% !important;
 }
 
 section[data-testid="stSidebar"] .block-container {
     padding: 0 !important;
+}
+
+[data-testid="stSidebarCollapsedControl"],
+[data-testid="collapsedControl"] {
+    display: flex !important;
+    visibility: visible !important;
+    z-index: 100000 !important;
 }
 
 section[data-testid="stSidebar"] button[kind="header"] {
@@ -187,7 +204,8 @@ section[data-testid="stSidebar"] [data-testid="stButton"] button:hover {
 }
 
 section[data-testid="stSidebar"] [data-testid="stButton"] button[key="nav_home_active"],
-section[data-testid="stSidebar"] [data-testid="stButton"] button[key="nav_search_active"] {
+section[data-testid="stSidebar"] [data-testid="stButton"] button[key="nav_search_active"],
+section[data-testid="stSidebar"] [data-testid="stButton"] button[key="nav_upload_active"] {
     background: #2563EB !important;
     color: #FFFFFF !important;
     font-weight: 600 !important;
@@ -790,4 +808,450 @@ section[data-testid="stSidebar"] [data-testid="stButton"] button[key="nav_search
 [data-testid="stButton"] button[key="close_evidence_btn"]:hover {
     background: #E2E8F0 !important;
     color: #0F172A !important;
-}
+}
+
+/* =========================================================
+   DOCUMENT UPLOAD PAGE — EXACT FIGMA MATCH
+========================================================= */
+
+.document-upload-page {
+    width: 100%;
+    max-width: 860px;
+    margin: 0 auto;
+    padding-top: 10px;
+}
+
+/* Page Header */
+.upload-page-header {
+    margin-bottom: 24px;
+    text-align: left;
+}
+
+.upload-page-title {
+    margin: 0 0 6px 0 !important;
+    color: #0F172A !important;
+    font-size: 28px !important;
+    font-weight: 800 !important;
+    letter-spacing: -0.5px !important;
+    line-height: 1.2 !important;
+    text-transform: uppercase !important;
+}
+
+.upload-page-subtitle {
+    margin: 0 !important;
+    color: #64748B !important;
+    font-size: 14.5px !important;
+    font-weight: 400 !important;
+    line-height: 1.4 !important;
+}
+
+/* Main Card Wrapper */
+.upload-card-wrapper {
+    background: #FFFFFF !important;
+    border: 1px solid #E2E8F0 !important;
+    border-radius: 16px !important;
+    padding: 32px 32px 24px 32px !important;
+    box-shadow: 0 10px 30px -5px rgba(15, 23, 42, 0.04), 0 2px 6px -1px rgba(15, 23, 42, 0.02) !important;
+    width: 100% !important;
+    margin-bottom: 20px !important;
+}
+
+/* Dashed Dropzone Top Header */
+.upload-dropzone-box {
+    border: 2px dashed #CBD5E1 !important;
+    border-radius: 12px 12px 0 0 !important;
+    border-bottom: none !important;
+    background: #FAFCFF !important;
+    padding: 36px 24px 8px 24px !important;
+    text-align: center !important;
+    display: flex !important;
+    flex-direction: column !important;
+    align-items: center !important;
+    justify-content: center !important;
+    transition: all 0.2s ease !important;
+}
+
+.upload-dropzone-box:hover {
+    border-color: #2563EB !important;
+    background: #F0F6FF !important;
+}
+
+/* Icon & Text inside dropzone */
+.cloud-icon-circle {
+    width: 64px;
+    height: 64px;
+    background: #EFF6FF;
+    border: 1px solid #DBEAFE;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-bottom: 14px;
+    box-shadow: 0 4px 12px rgba(37, 99, 235, 0.08);
+}
+
+.dropzone-heading {
+    font-size: 18px !important;
+    font-weight: 700 !important;
+    color: #0F172A !important;
+    margin-bottom: 4px !important;
+    letter-spacing: -0.3px !important;
+    text-align: center !important;
+}
+
+.dropzone-subheading {
+    font-size: 13.5px !important;
+    color: #64748B !important;
+    font-weight: 400 !important;
+    margin-bottom: 6px !important;
+    text-align: center !important;
+}
+
+/* Streamlit File Uploader styled as the bottom half of the dashed dropzone */
+[data-testid="stFileUploader"] {
+    background: #FAFCFF !important;
+    border: 2px dashed #CBD5E1 !important;
+    border-top: none !important;
+    border-radius: 0 0 12px 12px !important;
+    padding: 0 24px 24px 24px !important;
+    margin-top: -1px !important;
+    margin-bottom: 24px !important;
+    display: flex !important;
+    flex-direction: column !important;
+    justify-content: center !important;
+    align-items: center !important;
+    width: 100% !important;
+}
+
+/* Hide default duplicate left text inside Streamlit uploader */
+[data-testid="stFileUploaderDropzoneInstructions"],
+[data-testid="stFileUploaderDropzoneInstructions"] * {
+    display: none !important;
+}
+
+[data-testid="stFileUploaderDropzone"],
+[data-testid="stFileUploaderDropzone"] section,
+[data-testid="stFileUploaderDropzone"] div,
+section[data-testid="stFileUploader"] section,
+section[data-testid="stFileUploader"] div {
+    background: transparent !important;
+    border: none !important;
+    display: flex !important;
+    flex-direction: column !important;
+    justify-content: center !important;
+    align-items: center !important;
+    text-align: center !important;
+    width: 100% !important;
+    margin: 0 auto !important;
+    float: none !important;
+}
+
+/* Style and center the Streamlit "Browse files" button */
+[data-testid="stFileUploaderDropzone"] button,
+section[data-testid="stFileUploader"] button {
+    background-color: #2563EB !important;
+    color: #FFFFFF !important;
+    border: none !important;
+    border-radius: 8px !important;
+    height: 40px !important;
+    min-width: 160px !important;
+    padding: 0 24px !important;
+    font-size: 14px !important;
+    font-weight: 600 !important;
+    box-shadow: 0 3px 10px rgba(37, 99, 235, 0.25) !important;
+    transition: all 0.15s ease !important;
+    margin: 0 auto !important;
+    display: inline-flex !important;
+    justify-content: center !important;
+    align-items: center !important;
+    float: none !important;
+    visibility: visible !important;
+    opacity: 1 !important;
+}
+
+[data-testid="stFileUploaderDropzone"] button *,
+section[data-testid="stFileUploader"] button * {
+    color: #FFFFFF !important;
+    display: inline !important;
+    visibility: visible !important;
+    opacity: 1 !important;
+}
+
+[data-testid="stFileUploaderDropzone"] button:hover,
+section[data-testid="stFileUploader"] button:hover {
+    background-color: #1D4ED8 !important;
+    box-shadow: 0 4px 14px rgba(37, 99, 235, 0.35) !important;
+    transform: translateY(-1px);
+}
+
+/* Uploaded File Item Text & Card Box Styling */
+[data-testid="stFileUploaderFileData"],
+[data-testid="stFileUploaderFile"],
+[data-testid="stUploadedFileData"],
+[data-testid="stFileUploaderFileName"],
+[data-testid="stFileUploader"] small,
+[data-testid="stFileUploaderFileData"] *,
+[data-testid="stFileUploaderFile"] *,
+[data-testid="stUploadedFileData"] * {
+    color: #0F172A !important;
+    font-size: 13.5px !important;
+    font-weight: 600 !important;
+    opacity: 1 !important;
+    visibility: visible !important;
+}
+
+[data-testid="stFileUploaderFileData"],
+[data-testid="stFileUploaderFile"],
+[data-testid="stUploadedFileData"] {
+    background: #FFFFFF !important;
+    border: 1px solid #CBD5E1 !important;
+    border-radius: 8px !important;
+    padding: 8px 14px !important;
+    margin: 14px auto 0 auto !important;
+    box-shadow: 0 2px 6px rgba(0, 0, 0, 0.04) !important;
+    display: flex !important;
+    align-items: center !important;
+    justify-content: space-between !important;
+    max-width: 400px !important;
+}
+
+[data-testid="stFileUploaderFileData"] svg,
+[data-testid="stFileUploaderFile"] svg,
+[data-testid="stFileUploaderFileData"] button,
+[data-testid="stFileUploaderFile"] button {
+    color: #475569 !important;
+    fill: #475569 !important;
+    stroke: #475569 !important;
+}
+
+/* Selected files list styling */
+.uploaded-files-list {
+    margin-top: 20px;
+    background: #F8FAFC;
+    border: 1px solid #E2E8F0;
+    border-radius: 10px;
+    padding: 14px 18px;
+}
+
+.file-list-header {
+    font-size: 11px;
+    font-weight: 700;
+    color: #64748B;
+    letter-spacing: 0.5px;
+    margin-bottom: 10px;
+    text-transform: uppercase;
+}
+
+.uploaded-file-item {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    background: #FFFFFF;
+    border: 1px solid #E2E8F0;
+    border-radius: 8px;
+    padding: 10px 14px;
+    margin-bottom: 8px;
+}
+
+.uploaded-file-item:last-child {
+    margin-bottom: 0;
+}
+
+.file-item-icon {
+    background: #EFF6FF;
+    color: #2563EB;
+    font-size: 10px;
+    font-weight: 800;
+    padding: 4px 8px;
+    border-radius: 4px;
+    margin-right: 12px;
+}
+
+.file-item-info {
+    display: flex;
+    flex-direction: column;
+    flex-grow: 1;
+}
+
+.file-name {
+    font-size: 13.5px;
+    font-weight: 600;
+    color: #0F172A;
+}
+
+.file-size {
+    font-size: 11.5px;
+    color: #64748B;
+}
+
+.file-item-status {
+    font-size: 12px;
+    font-weight: 600;
+    color: #166534;
+    background: #F0FDF4;
+    border: 1px solid #BBF7D0;
+    padding: 2px 10px;
+    border-radius: 12px;
+}
+
+/* Streamlit Button styling for Process Documents */
+button[key="btn_process_documents"],
+[data-testid="stButton"] button[key="btn_process_documents"] {
+    background: #2563EB !important;
+    color: #FFFFFF !important;
+    border: none !important;
+    border-radius: 10px !important;
+    height: 48px !important;
+    padding: 0 36px !important;
+    font-size: 15px !important;
+    font-weight: 600 !important;
+    box-shadow: 0 4px 14px rgba(37, 99, 235, 0.3) !important;
+    transition: all 0.2s ease !important;
+    display: flex !important;
+    align-items: center !important;
+    justify-content: center !important;
+    gap: 8px !important;
+    margin: 16px auto 20px auto !important;
+    width: 100% !important;
+}
+
+button[key="btn_process_documents"]:hover,
+[data-testid="stButton"] button[key="btn_process_documents"]:hover {
+    background: #1D4ED8 !important;
+    box-shadow: 0 6px 18px rgba(37, 99, 235, 0.4) !important;
+    transform: translateY(-1px);
+}
+
+button[key="btn_process_documents"]:disabled,
+[data-testid="stButton"] button[key="btn_process_documents"]:disabled {
+    background: #94A3B8 !important;
+    color: #E2E8F0 !important;
+    box-shadow: none !important;
+    cursor: not-allowed !important;
+    opacity: 0.7 !important;
+}
+
+/* Progress bar & status */
+.processing-progress-box {
+    margin: 16px 0;
+    padding: 16px;
+    background: #F8FAFC;
+    border-radius: 10px;
+    border: 1px solid #E2E8F0;
+}
+
+.processing-status-text {
+    font-size: 13px;
+    color: #2563EB;
+    font-weight: 600;
+    margin-top: 8px;
+    text-align: center;
+}
+
+/* Upload Success Banner */
+.upload-success-banner {
+    display: flex;
+    align-items: center;
+    gap: 14px;
+    background: #F0FDF4;
+    border: 1px solid #BBF7D0;
+    border-radius: 10px;
+    padding: 14px 18px;
+    margin-bottom: 20px;
+}
+
+.success-icon {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: #DCFCE7;
+    border-radius: 50%;
+    width: 32px;
+    height: 32px;
+    flex-shrink: 0;
+}
+
+.success-text {
+    display: flex;
+    flex-direction: column;
+    gap: 2px;
+}
+
+.success-text strong {
+    color: #166534;
+    font-size: 14px;
+}
+
+.success-text span {
+    color: #15803D;
+    font-size: 13px;
+}
+
+/* Card Footer Row */
+.upload-footer-row {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    border-top: 1px solid #F1F5F9;
+    padding-top: 20px;
+    margin-top: 20px;
+    flex-wrap: wrap;
+    gap: 12px;
+}
+
+.supported-formats {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    font-size: 12.5px;
+    font-weight: 600;
+    color: #475569;
+}
+
+.format-chip {
+    display: inline-flex;
+    align-items: center;
+    gap: 5px;
+    color: #475569;
+}
+
+.format-dot {
+    color: #CBD5E1;
+    font-size: 10px;
+}
+
+.processing-note {
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    font-size: 12.5px;
+    color: #64748B;
+}
+
+/* Sidebar fixes for exact Figma match */
+.sidebar-brand {
+    padding: 12px 12px 28px 12px !important;
+}
+
+.brand-icon {
+    width: 34px !important;
+    height: 34px !important;
+    background: #2563EB !important;
+    border-radius: 8px !important;
+    font-weight: 800 !important;
+}
+
+.brand-name {
+    color: #FFFFFF !important;
+    font-size: 16px !important;
+    font-weight: 700 !important;
+}
+
+section[data-testid="stSidebar"] [data-testid="stButton"] button[key="nav_upload_active"] {
+    background: #2563EB !important;
+    color: #FFFFFF !important;
+    font-weight: 600 !important;
+    border-radius: 8px !important;
+    box-shadow: 0 3px 8px rgba(37, 99, 235, 0.35) !important;
+}
+

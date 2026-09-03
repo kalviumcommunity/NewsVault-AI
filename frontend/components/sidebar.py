@@ -29,8 +29,11 @@ def render_sidebar():
             st.session_state["current_page"] = "results"
             st.rerun()
 
-        if st.button("📤  Upload", key="nav_upload_btn", use_container_width=True):
-            st.info("Document Upload page coming soon")
+        # Upload button
+        upload_key = "nav_upload_active" if current_page == "upload" else "nav_upload_inactive"
+        if st.button("📄  Upload", key=upload_key, use_container_width=True):
+            st.session_state["current_page"] = "upload"
+            st.rerun()
 
         if st.button("🎛️  Filters", key="nav_filters_btn", use_container_width=True):
             st.info("Filters panel coming soon")
