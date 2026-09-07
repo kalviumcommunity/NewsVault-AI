@@ -1255,3 +1255,457 @@ section[data-testid="stSidebar"] [data-testid="stButton"] button[key="nav_upload
     box-shadow: 0 3px 8px rgba(37, 99, 235, 0.35) !important;
 }
 
+/* =========================================================
+   FILTERS DASHBOARD — EXACT FIGMA MATCH
+========================================================= */
+
+.filters-page-wrapper {
+    width: 100%;
+    margin: 0 auto;
+}
+
+/* Header bar */
+.filters-page-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+    margin-bottom: 8px;
+}
+
+.filters-title {
+    margin: 0 0 4px 0 !important;
+    color: #0F172A !important;
+    font-size: 28px !important;
+    font-weight: 800 !important;
+    letter-spacing: -0.5px !important;
+    line-height: 1.2 !important;
+    text-transform: uppercase !important;
+}
+
+.filters-subtitle {
+    margin: 0 !important;
+    color: #64748B !important;
+    font-size: 14.5px !important;
+    font-weight: 400 !important;
+}
+
+.header-right {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+}
+
+.header-icon-btn {
+    width: 36px;
+    height: 36px;
+    background: #FFFFFF;
+    border: 1px solid #E2E8F0;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.04);
+    transition: all 0.15s ease;
+}
+
+.header-icon-btn:hover {
+    background: #F8FAFC;
+    border-color: #CBD5E1;
+}
+
+.user-avatar-badge {
+    width: 36px;
+    height: 36px;
+    background: #0F172A;
+    color: #FFFFFF;
+    font-size: 13px;
+    font-weight: 700;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+.header-divider {
+    height: 1px;
+    background: #E2E8F0;
+    margin: 16px 0 24px 0;
+}
+
+/* Parameter Configuration Container Card (Left Column) */
+[data-testid="column"]:first-child > div > div[data-testid="stVerticalBlock"] {
+    background: #FFFFFF !important;
+    border: 1px solid #E2E8F0 !important;
+    border-radius: 16px !important;
+    padding: 24px !important;
+    box-shadow: 0 4px 20px -2px rgba(15, 23, 42, 0.04) !important;
+}
+
+.panel-header-title {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    margin-bottom: 12px;
+}
+
+.panel-header-title h2 {
+    margin: 0 !important;
+    font-size: 18px !important;
+    font-weight: 700 !important;
+    color: #0F172A !important;
+    letter-spacing: -0.3px !important;
+}
+
+.panel-divider {
+    height: 1px;
+    background: #F1F5F9;
+    margin: 16px 0;
+}
+
+/* =========================================================
+   OUTER CARD BOX ("OUTBOX") STYLING
+========================================================= */
+
+/* Parameter Configuration Outer White Card Box ("outbox") */
+[data-testid="column"]:first-child [data-testid="stVerticalBlockBorderWrapper"],
+div[data-testid="stVerticalBlockBorderWrapper"] {
+    background: #FFFFFF !important;
+    border: 1px solid #E2E8F0 !important;
+    border-radius: 16px !important;
+    padding: 24px !important;
+    box-shadow: 0 4px 20px -2px rgba(15, 23, 42, 0.04) !important;
+}
+
+/* Quick Filters Outer White Card Box */
+[data-testid="column"]:last-child [data-testid="stVerticalBlockBorderWrapper"] {
+    background: #FFFFFF !important;
+    border: 1px solid #E2E8F0 !important;
+    border-radius: 14px !important;
+    padding: 20px !important;
+    box-shadow: 0 4px 16px -2px rgba(15, 23, 42, 0.03) !important;
+}
+
+/* =========================================================
+   TEMPORAL RANGE UNIFIED BOX (EXACT FIGMA MATCH)
+========================================================= */
+
+.temporal-card-box {
+    background: #F4F7FC !important;
+    border: 1px solid #E2E8F0 !important;
+    border-left: 4px solid #2563EB !important;
+    border-bottom: none !important;
+    border-radius: 12px 12px 0 0 !important;
+    padding: 16px 20px 4px 20px !important;
+    margin: 0 !important;
+}
+
+.temporal-title {
+    font-size: 13px !important;
+    font-weight: 600 !important;
+    color: #475569 !important;
+    letter-spacing: 0px !important;
+    text-transform: none !important;
+}
+
+/* Slider Streamlit Component Customization */
+[data-testid="stSlider"] {
+    background: #F4F7FC !important;
+    border: 1px solid #E2E8F0 !important;
+    border-left: 4px solid #2563EB !important;
+    border-top: none !important;
+    border-bottom: none !important;
+    padding: 0 20px 4px 20px !important;
+    margin: 0 !important;
+    box-shadow: none !important;
+}
+
+/* Completely Hide ALL Red Tooltips, Values, Popovers, and Badges */
+[data-testid="stSlider"] [data-baseweb="slider"] div[role="slider"] > div,
+[data-testid="stSlider"] [data-baseweb="tooltip"],
+[data-testid="stSlider"] [data-baseweb="popover"],
+[data-testid="stSlider"] div[data-testid="stWidgetLabel"],
+[data-testid="stSlider"] label {
+    display: none !important;
+    visibility: hidden !important;
+    opacity: 0 !important;
+    height: 0 !important;
+}
+
+/* Style Slider Min and Max Labels (2015 and 2025) as Dark Slate Text! */
+[data-testid="stSlider"] [data-testid="stTickBarMin"],
+[data-testid="stSlider"] [data-testid="stTickBarMax"],
+[data-testid="stSlider"] div[data-testid="stSliderTickBar"] *,
+[data-testid="stSlider"] p,
+[data-testid="stSlider"] span {
+    color: #334155 !important;
+    font-size: 15px !important;
+    font-weight: 600 !important;
+    opacity: 1 !important;
+    visibility: visible !important;
+    display: inline-block !important;
+}
+
+/* Slider Track Bar - Single Smooth Thick Gray Bar */
+[data-testid="stSlider"] div[data-baseweb="slider"] > div {
+    background: transparent !important;
+    padding: 8px 0 !important;
+}
+
+[data-testid="stSlider"] div[data-baseweb="slider"] > div > div {
+    background: #CBD5E1 !important;
+    height: 10px !important;
+    border-radius: 5px !important;
+}
+
+/* Active Range Highlight - Match Figma Gray Track */
+[data-testid="stSlider"] div[data-baseweb="slider"] div[style*="left"] {
+    background: #CBD5E1 !important;
+}
+
+/* Slider Thumbs / Handles - Soft Gray Circles Matching Track */
+[data-testid="stSlider"] [role="slider"] {
+    background-color: #CBD5E1 !important;
+    border: 2px solid #FFFFFF !important;
+    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.12) !important;
+    width: 16px !important;
+    height: 16px !important;
+    border-radius: 50% !important;
+}
+
+/* Temporal Card Box Bottom - AI Suggestion Note */
+.temporal-card-box-bottom {
+    background: #F4F7FC !important;
+    border: 1px solid #E2E8F0 !important;
+    border-left: 4px solid #2563EB !important;
+    border-top: none !important;
+    border-radius: 0 0 12px 12px !important;
+    padding: 4px 20px 16px 20px !important;
+    text-align: center !important;
+    font-size: 12.5px !important;
+    color: #64748B !important;
+    margin-bottom: 24px !important;
+}
+
+
+
+
+/* Filter Selectboxes & Input Override */
+[data-testid="stSelectbox"],
+[data-testid="stTextInput"] {
+    margin-bottom: 16px !important;
+}
+
+[data-testid="stSelectbox"] label,
+[data-testid="stTextInput"] label,
+[data-testid="stSelectbox"] label p,
+[data-testid="stTextInput"] label p {
+    color: #475569 !important;
+    font-size: 12.5px !important;
+    font-weight: 700 !important;
+    text-transform: capitalize !important;
+    display: block !important;
+    margin-bottom: 6px !important;
+}
+
+/* Select Box Input Box - Clean Light Style */
+[data-testid="stSelectbox"] div[data-baseweb="select"] > div {
+    background-color: #FAFCFF !important;
+    border: 1px solid #CBD5E1 !important;
+    border-radius: 8px !important;
+    height: 44px !important;
+    box-shadow: none !important;
+}
+
+[data-testid="stSelectbox"] div[data-baseweb="select"]:hover > div {
+    border-color: #2563EB !important;
+}
+
+[data-testid="stSelectbox"] div[data-baseweb="select"] * {
+    color: #0F172A !important;
+    font-size: 14px !important;
+    font-weight: 600 !important;
+}
+
+[data-testid="stSelectbox"] svg {
+    fill: #475569 !important;
+    stroke: #475569 !important;
+    color: #475569 !important;
+}
+
+/* Semantic Keywords Input Box */
+.st-key-input_semantic_keywords input {
+    background-color: #FAFCFF !important;
+    border: 1px solid #CBD5E1 !important;
+    border-radius: 8px !important;
+    height: 44px !important;
+    color: #0F172A !important;
+    font-size: 14px !important;
+    font-weight: 500 !important;
+    padding-left: 40px !important;
+    background-image: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="%23475569" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 7V4h16v3M9 20h6M12 4v16"/></svg>') !important;
+    background-repeat: no-repeat !important;
+    background-position: 12px center !important;
+}
+
+.st-key-input_semantic_keywords input::placeholder {
+    color: #94A3B8 !important;
+}
+
+/* Action Buttons (Clear Filters & Apply Filters) */
+.st-key-btn_clear_filters button,
+[data-testid="stBaseButton-secondary"] {
+    background-color: #FFFFFF !important;
+    background: #FFFFFF !important;
+    border: 1px solid #CBD5E1 !important;
+    border-radius: 8px !important;
+    color: #0F172A !important;
+    font-size: 14px !important;
+    font-weight: 700 !important;
+    height: 44px !important;
+    box-shadow: none !important;
+    transition: all 0.15s ease !important;
+}
+
+.st-key-btn_clear_filters button:hover {
+    background-color: #F8FAFC !important;
+    border-color: #94A3B8 !important;
+}
+
+.st-key-btn_apply_filters button,
+button[data-testid="stBaseButton-primary"] {
+    background-color: #2563EB !important;
+    background: #2563EB !important;
+    border: none !important;
+    border-radius: 8px !important;
+    color: #FFFFFF !important;
+    font-size: 14px !important;
+    font-weight: 700 !important;
+    height: 44px !important;
+    box-shadow: 0 3px 10px rgba(37, 99, 235, 0.35) !important;
+    transition: all 0.15s ease !important;
+}
+
+.st-key-btn_apply_filters button:hover,
+button[data-testid="stBaseButton-primary"]:hover {
+    background-color: #1D4ED8 !important;
+    background: #1D4ED8 !important;
+    box-shadow: 0 5px 14px rgba(37, 99, 235, 0.45) !important;
+}
+
+.st-key-btn_apply_filters button *,
+button[data-testid="stBaseButton-primary"] * {
+    color: #FFFFFF !important;
+}
+
+/* Right Column Containers */
+/* Active State Dark Card */
+.active-state-card {
+    background: #090E17;
+    border: 1px solid #1E293B;
+    border-radius: 14px;
+    padding: 20px;
+    margin-bottom: 20px;
+    box-shadow: 0 4px 16px rgba(0, 0, 0, 0.12);
+}
+
+.active-state-card .card-header {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    margin-bottom: 16px;
+}
+
+.active-state-card .card-header h3 {
+    margin: 0 !important;
+    font-size: 16px !important;
+    font-weight: 700 !important;
+    color: #FFFFFF !important;
+}
+
+.active-state-rows {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+}
+
+.state-row {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    border-bottom: 1px solid #1E293B;
+    padding-bottom: 10px;
+}
+
+.state-row:last-child {
+    border-bottom: none;
+    padding-bottom: 0;
+}
+
+.state-label {
+    font-size: 12.5px;
+    color: #94A3B8;
+    font-weight: 500;
+}
+
+.state-value {
+    font-size: 13px;
+    color: #FFFFFF;
+    font-weight: 700;
+}
+
+/* Quick Filters Card */
+[data-testid="column"]:last-child > div > div[data-testid="stVerticalBlock"] > div:last-child {
+    background: #FFFFFF !important;
+    border: 1px solid #E2E8F0 !important;
+    border-radius: 14px !important;
+    padding: 20px !important;
+    box-shadow: 0 4px 16px -2px rgba(15, 23, 42, 0.03) !important;
+}
+
+.quick-filters-header {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    margin-bottom: 16px;
+}
+
+.quick-filters-header h3 {
+    margin: 0 !important;
+    font-size: 16px !important;
+    font-weight: 700 !important;
+    color: #0F172A !important;
+}
+
+/* Quick Filter Pills (Rounded Pill Buttons) */
+[data-testid="column"]:last-child [data-testid="stButton"] button {
+    background-color: #FFFFFF !important;
+    border: 1px solid #E2E8F0 !important;
+    border-radius: 20px !important;
+    color: #334155 !important;
+    font-size: 13px !important;
+    font-weight: 500 !important;
+    padding: 6px 14px !important;
+    height: 36px !important;
+    box-shadow: none !important;
+    transition: all 0.15s ease !important;
+}
+
+[data-testid="column"]:last-child [data-testid="stButton"] button:hover {
+    background-color: #EFF6FF !important;
+    border-color: #BFDBFE !important;
+    color: #1E40AF !important;
+}
+
+/* Section Sidebar Button Active State for Filters */
+section[data-testid="stSidebar"] [data-testid="stButton"] button[key="nav_filters_active"] {
+    background: #2563EB !important;
+    color: #FFFFFF !important;
+    font-weight: 600 !important;
+    border-radius: 8px !important;
+    box-shadow: 0 3px 8px rgba(37, 99, 235, 0.35) !important;
+}
+
+
+
