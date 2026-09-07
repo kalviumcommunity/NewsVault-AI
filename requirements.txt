@@ -4,3 +4,4 @@ google-genai
 streamlit==1.50.0
 openai
 pymupdf
+python-docx
