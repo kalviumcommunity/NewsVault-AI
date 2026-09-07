@@ -35,10 +35,13 @@ def render_sidebar():
             st.session_state["current_page"] = "upload"
             st.rerun()
 
-        if st.button("🎛️  Filters", key="nav_filters_btn", use_container_width=True):
-            st.info("Filters panel coming soon")
+        # Filters button
+        filters_key = "nav_filters_active" if current_page == "filters" else "nav_filters_inactive"
+        if st.button("🎛️  Filters", key=filters_key, use_container_width=True):
+            st.session_state["current_page"] = "filters"
+            st.rerun()
 
         st.markdown('<div class="sidebar-spacer" style="height: 180px;"></div>', unsafe_allow_html=True)
 
         if st.button("🚪  Logout", key="nav_logout_btn", use_container_width=True):
-            st.success("Logged out")
+            st.success("Logged out")
