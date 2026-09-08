@@ -1,0 +1,108 @@
+
+print page button
+Ministry of Statistics & Programme Implementation
+azadi ka amrit mahotsav
+FIRST ADVANCE ESTIMATES OF GROSS DOMESTIC PRODUCT, 2025-26
+
+Real GDP has witnessed 7.4% growth rate in FY 2025-26 over the growth rate of 6.5% in FY 2024-25
+
+Buoyant growth in Services Sector has led Indian Economy registering Real GVA growth of 7.3% in FY 2025-26
+
+Posted On: 07 JAN 2026 4:00PM by PIB Delhi
+           The National Statistics Office (NSO), Ministry of Statistics and Programme Implementation (MoSPI) is releasing in this Press Note, the First Advance Estimates of Gross Domestic Product (GDP) for the Financial Year (FY) 2025-26 along with its Expenditure components both at Constant (2011-12) and Current Prices. Annual Estimates of Gross Value Added (GVA) at Basic Prices for various economic sectors along with Year-on-Year percent changes, Expenditure components of GDP, Annual estimates of Gross/Net National Income and Per Capita Income for the FYs 2023-24, 2024-25 and 2025-26 at Constant and Current Prices are given in Statements 1 to 4 of Annexure A.
+
+Key Highlights:
+
+ Real GDP has been estimated to grow by 7.4% in FY 2025-26 against the growth rate of 6.5% during FY 2024-25.
+Nominal GDP is estimated to grow at 8.0% in FY 2025-26.
+Buoyant Growth in Services Sector has been found to be a major driver in the estimated Real GVA growth rate of 7.3% in FY 2025-26.
+Financial, Real Estate & Professional Services and Public Administration, Defence & Other Services in the Tertiary Sector have been estimated to attain a substantial growth rate of 9.9% at Constant Prices in FY 2025-26.
+Trade, Hotels, Transport, Communication & Services related to Broadcasting Sector has been estimated to grow by 7.5% at Constant Prices in FY 2025-26.
+Manufacturing and Construction in the Secondary Sector has been estimated to achieve a growth rate of 7.0% at Constant Prices in FY 2025-26.
+Agriculture & Allied Sector (3.1%) and Electricity, Gas, Water Supply & Other Utility Services Sector (2.1%) have seen moderate growth rate in GVA at Constant Prices during FY 2025-26.
+ Real Private Final Consumption Expenditure (PFCE) has been estimated to attain a growth rate of 7.0% during FY 2025-26.
+ Gross Fixed Capital Formation (GFCF) has been estimated to have 7.8% growth rate at Constant Prices during FY 2025-26, compared to 7.1% growth rate in previous FY.
+ 
+
+I. Annual Estimates and Growth Rates
+
+           Real GDP or GDP at Constant Prices is estimated to attain a level of ₹201.90 lakh crore in FY 2025-26, against the Provisional Estimates (PE) of GDP for the FY 2024-25 of ₹187.97 lakh crore, registering a growth rate of 7.4%. Nominal GDP or GDP at Current Prices is estimated to attain a level of ₹357.14 lakh crore in the FY 2025-26, against ₹330.68 lakh crore in FY 2024-25, showing a growth rate of 8.0%.
+
+           Real GVA is estimated at ₹184.50 lakh crore in the FY 2025-26, against the Provisional Estimates (PE) for the FY 2024-25 of ₹171.87 lakh crore, registering a growth rate of 7.3%. Nominal GVA is estimated to attain a level of ₹323.48 lakh crore during FY 2025-26, against ₹300.22 lakh crore in FY 2024-25, showing a growth rate of 7.7%.
+
+Fig. 1: Annual GDP and GVA Estimates along with Y-o-Y Growth Rates at Constant Prices
+
+
+
+
+
+ 
+
+Fig. 2: Sectoral Composition and Growth Rates of Annual GVA
+
+Sectoral Composition of Nominal GVA in FY 2025-26
+
+
+
+
+
+ 
+
+Fig. 3: Composition and Growth Rates of Annual GVA in Broad Sectors
+
+
+ 
+
+
+[Primary Sector: Agriculture, Livestock, Forestry & Fishing and Mining & Quarrying
+
+Secondary Sector: Manufacturing, Electricity, Gas, Water supply & Other Utility Services and Construction
+
+Tertiary Sector: Trade, Hotels, Transport, Communication and Services related to Broadcasting, Financial, Real Estate & Professional Services and Public Administration, Defence & Other Services]
+
+ 
+
+II. Methodology and Major Data Sources:
+
+            Advance Estimates of GDP are indicator based and compiled using the benchmark-indicator method i.e. the estimates available for the previous financial year (2024-25) are extrapolated using the relevant indicators reflecting the performance of the sectors. Data sourced from various Ministries/Departments/Private Agencies serve as valuable inputs in the compilation of these estimates.
+
+            The sector-wise estimates have been compiled using indicators/data sources viz. (i) Index of Industrial Production (IIP), (ii) Financial performance of Listed Companies based on available quarterly financial results of these companies for Q1 and Q2 of 2025-26, (iii) Estimates of Major Agricultural Crops for 2025-26 as provided by Ministry of Agriculture & Farmers Welfare, (iv) Summer as well as Rainy season production estimates of Major Livestock Products for 2025-26; (v) Fish Production, (vi) Production of Coal, Crude Petroleum, Natural Gas, Cement and Consumption of Steel, (vii) Net Tonne Kilometres and Passenger Kilometres for Railways, (viii) Passenger and Cargo traffic handled by Civil Aviation, (ix) Cargo traffic handled at Major and Minor Sea Ports, (x) Sales of Commercial Vehicles, (xi) Bank Deposits and Credits, (xii) Premium related information of Life and Non-Life Insurance companies, (xiii) Data on outward Supplies of Goods and Services available from GSTN upto November 2025, (xiv) Accounts of Central and State Governments, (xv) Goods and Services Tax collections etc., available till the latest period of FY 2025-26. Year-on-Year growth rates (%) in the main indicators used in the estimation are given in the Annexure B.
+
+            Total tax revenue used for GDP compilation includes non-GST revenue as well as GST revenue. The Budget Estimates of Tax Revenue for FY 2025-26 along with latest available information from the websites of Controller General of Accounts (CGA) and Comptroller and Auditor General of India (CAG) have been used for estimating taxes on products at Current Prices. For compiling taxes on products at Constant Prices, volume extrapolation is done using volume growth of taxed goods and services. The total product subsidies at Current Prices were compiled using information on major subsidies viz, Food, Urea, Petroleum and Nutrient based subsidy for Centre as available on CGA website and the expenditure incurred on subsidies by most States up to November 2025 as available on CAG website along with the Centre/ State-wise BE provision for 2025-26.
+
+            The indicators used for compilation of Expenditure components of GDP relies on a subset of indicators that are used in Production approach. However, the components like Import of Goods and Services, Export of Goods and Services, Valuables, Import and Export of Capital Goods are compiled based on the Monthly Import and Export data, sourced from Ministry of Commerce and Industry and Reserve Bank of India. Information available on Revenue expenditure, Interest payments, Subsidies etc. from the websites of CGA and CAG were used for estimating Government Final Consumption Expenditure (GFCE). The Discrepancy refers to the gap between GDP by Production and Expenditure approach. The estimates of various economic sectors, as well as expenditure components using different kind of data sources and deflators, have likely attributed to the quantum and direction of Discrepancy.
+
+            It is being informed that Ministry of Statistics and Programme Implementation (MoSPI) is currently in the process of revising the Base year of National Accounts from FY 2011-12 (Current Series) to FY 2022-23 (New Series). Therefore, the Advance and Quarterly Estimates will undergo revisions due to Changes in the Methodology of Estimation at Current and Constant Prices, Incorporation of Updated and New Data Sources, Updation of Annual Benchmark etc. Users should consider these factors while interpreting the subsequent revised estimates. The Second Advance Estimates of GDP for FY 2025-26 along with past 3 financial years’ GDP estimates as well as Quarterly GDP estimates as per the new base FY 2022-23 will be released on 27.02.2026.
+
+***********
+
+Annexure A
+
+
+
+
+
+
+
+
+
+Annexure B
+
+Year-on-Year Growth Rates (%) in Major Indicators
+
+ 
+
+Click here for pdf file. 
+
+*****
+
+Samrat
+
+
+(Release ID: 2212087) Visitor Counter : 57359
+Read this release in: Bengali , Bengali-TR , Urdu , हिन्दी , Marathi
+Share on facebook
+Share on twitter
+Share on whatsapp
+Share on email
+Share on linkedin

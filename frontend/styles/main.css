@@ -187,7 +187,9 @@ section[data-testid="stSidebar"] [data-testid="stButton"] button:hover {
 }
 
 section[data-testid="stSidebar"] [data-testid="stButton"] button[key="nav_home_active"],
-section[data-testid="stSidebar"] [data-testid="stButton"] button[key="nav_search_active"] {
+section[data-testid="stSidebar"] [data-testid="stButton"] button[key="nav_search_active"],
+section[data-testid="stSidebar"] [data-testid="stButton"] button[key="nav_upload_active"],
+section[data-testid="stSidebar"] [data-testid="stButton"] button[key="nav_filters_active"] {
     background: #2563EB !important;
     color: #FFFFFF !important;
     font-weight: 600 !important;
@@ -352,7 +354,7 @@ section[data-testid="stSidebar"] [data-testid="stButton"] button[key="nav_search
 }
 
 /* Streamlit Search Button Override */
-[data-testid="stButton"] button {
+.main [data-testid="stButton"]:not([data-element-key="btn_process_documents"]) button:not([key="btn_process_documents"]):not([key="search_button"]):not([key^="nav_"]):not([key="back_to_search_btn"]) {
     background-color: #F8FAFC !important;
     color: #334155 !important;
     border: 1px solid #E2E8F0 !important;
@@ -790,4 +792,251 @@ section[data-testid="stSidebar"] [data-testid="stButton"] button[key="nav_search
 [data-testid="stButton"] button[key="close_evidence_btn"]:hover {
     background: #E2E8F0 !important;
     color: #0F172A !important;
-}
+}
+
+/* =========================================================
+   DOCUMENT UPLOAD PAGE — EXACT FIGMA MATCH
+========================================================= */
+
+.upload-page-container {
+    width: 100%;
+    max-width: 860px;
+    margin: 0 auto;
+    padding-top: 10px;
+}
+
+.upload-page-title {
+    font-size: 26px !important;
+    font-weight: 800 !important;
+    color: #0F172A !important;
+    letter-spacing: -0.5px !important;
+    margin: 0 0 6px 0 !important;
+    text-transform: uppercase !important;
+}
+
+.upload-page-subtitle {
+    font-size: 14.5px !important;
+    color: #64748B !important;
+    font-weight: 400 !important;
+    margin: 0 0 24px 0 !important;
+}
+
+/* Main Outer Card Container (st.container key="upload_card_box") */
+div[data-element-key="upload_card_box"],
+div[data-testid="stVerticalBlock"]:has(div[data-element-key="upload_card_box"]) {
+    background: #FFFFFF !important;
+    border: 1px solid #E2E8F0 !important;
+    border-left: 4px solid #2563EB !important;
+    border-radius: 16px !important;
+    padding: 32px 28px !important;
+    box-shadow: 0 4px 20px -2px rgba(15, 23, 42, 0.04), 0 2px 6px -1px rgba(15, 23, 42, 0.02) !important;
+    margin-top: 10px !important;
+}
+
+/* Dashed Dropzone Box Header */
+.upload-dropzone-dashed-box,
+.upload-dropzone-box {
+    border: 2px dashed #CBD5E1;
+    border-radius: 14px;
+    padding: 36px 24px 24px 24px;
+    background: #FAFCFF;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    transition: all 0.2s ease;
+}
+
+.upload-dropzone-dashed-box:hover,
+.upload-dropzone-box:hover {
+    border-color: #2563EB;
+    background: #F0F7FF;
+}
+
+.upload-cloud-icon-circle {
+    width: 60px;
+    height: 60px;
+    background: #E0EDFF;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin: 0 auto 14px auto;
+    box-shadow: 0 2px 8px rgba(37, 99, 235, 0.12);
+}
+
+.upload-dropzone-title {
+    font-size: 18px;
+    font-weight: 700;
+    color: #0F172A;
+    margin-bottom: 4px;
+}
+
+.upload-dropzone-subtitle {
+    font-size: 13.5px;
+    color: #64748B;
+    margin-bottom: 12px;
+}
+
+/* Native File Uploader Dropzone Reset & Alignment */
+[data-testid="stFileUploader"] {
+    width: 100% !important;
+    margin-top: 16px !important;
+    margin-bottom: 16px !important;
+}
+
+[data-testid="stFileUploader"] section[data-testid="stFileUploaderDropzone"] {
+    background: transparent !important;
+    border: none !important;
+    padding: 0 !important;
+    display: flex !important;
+    flex-direction: column !important;
+    align-items: center !important;
+    justify-content: center !important;
+}
+
+/* Hide default instruction text in stFileUploader dropzone */
+[data-testid="stFileUploaderDropzoneInstructions"] {
+    display: none !important;
+}
+
+/* Style Browse Files button */
+[data-testid="stFileUploader"] button,
+[data-testid="stFileUploader"] [data-testid="stBaseButton-secondary"],
+[data-testid="stFileUploaderDropzone"] button {
+    background: #2563EB !important;
+    background-color: #2563EB !important;
+    color: #FFFFFF !important;
+    border: none !important;
+    border-radius: 8px !important;
+    height: 42px !important;
+    padding: 0 28px !important;
+    font-size: 14px !important;
+    font-weight: 600 !important;
+    box-shadow: 0 2px 6px rgba(37, 99, 235, 0.3) !important;
+    transition: all 0.15s ease !important;
+    margin: 0 auto !important;
+    display: inline-flex !important;
+    align-items: center !important;
+    justify-content: center !important;
+}
+
+[data-testid="stFileUploader"] button:hover,
+[data-testid="stFileUploader"] [data-testid="stBaseButton-secondary"]:hover,
+[data-testid="stFileUploaderDropzone"] button:hover {
+    background: #1D4ED8 !important;
+    background-color: #1D4ED8 !important;
+    color: #FFFFFF !important;
+    box-shadow: 0 4px 12px rgba(37, 99, 235, 0.4) !important;
+}
+
+/* Uploaded File Name & Text Color (Dark Black Font) */
+[data-testid="stFileUploaderFile"],
+[data-testid="stFileUploaderFile"] *,
+[data-testid="stUploadedFileData"],
+[data-testid="stUploadedFileData"] *,
+[data-testid="stFileUploaderFileName"],
+[data-testid="stFileUploaderFileName"] *,
+[data-testid="stFileUploaderDeleteBtn"],
+[data-testid="stFileUploaderDeleteBtn"] * {
+    color: #0F172A !important;
+    fill: #0F172A !important;
+}
+
+[data-testid="stFileUploaderFile"] {
+    background: #F8FAFC !important;
+    border: 1px solid #E2E8F0 !important;
+    border-radius: 8px !important;
+    padding: 10px 14px !important;
+    margin-top: 10px !important;
+}
+
+/* Full Width Process Button (Solid Blue) */
+[data-element-key="btn_process_documents"] button,
+button[key="btn_process_documents"],
+[data-testid="stButton"] button[key="btn_process_documents"] {
+    width: 100% !important;
+    height: 48px !important;
+    background: #2563EB !important;
+    background-color: #2563EB !important;
+    color: #FFFFFF !important;
+    border: none !important;
+    border-radius: 10px !important;
+    font-size: 15px !important;
+    font-weight: 600 !important;
+    letter-spacing: -0.2px !important;
+    box-shadow: 0 4px 12px rgba(37, 99, 235, 0.25) !important;
+    transition: all 0.15s ease !important;
+    display: flex !important;
+    align-items: center !important;
+    justify-content: center !important;
+    gap: 8px !important;
+}
+
+[data-element-key="btn_process_documents"] button:hover,
+button[key="btn_process_documents"]:hover,
+[data-testid="stButton"] button[key="btn_process_documents"]:hover {
+    background: #1D4ED8 !important;
+    background-color: #1D4ED8 !important;
+    color: #FFFFFF !important;
+    box-shadow: 0 6px 16px rgba(37, 99, 235, 0.35) !important;
+}
+
+/* Alert Notifications Formatting */
+[data-testid="stAlert"] {
+    border-radius: 10px !important;
+}
+
+[data-testid="stAlert"] * {
+    color: #0F172A !important;
+    font-weight: 500 !important;
+}
+
+/* Upload Footer Info Row */
+.upload-card-footer {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding-top: 24px;
+    margin-top: 24px;
+    border-top: 1px solid #F1F5F9;
+    flex-wrap: wrap;
+    gap: 12px;
+}
+
+.format-badges-group {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    font-size: 12.5px;
+    color: #64748B;
+    font-weight: 500;
+}
+
+.format-pill-badge {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    background: #F8FAFC;
+    border: 1px solid #E2E8F0;
+    padding: 4px 10px;
+    border-radius: 6px;
+    color: #334155;
+    font-weight: 600;
+    font-size: 12px;
+}
+
+.format-dot-separator {
+    color: #CBD5E1;
+    font-size: 10px;
+}
+
+.upload-notice-text {
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    font-size: 12.5px;
+    color: #64748B;
+}
+
