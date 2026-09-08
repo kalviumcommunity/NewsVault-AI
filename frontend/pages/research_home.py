@@ -50,4 +50,9 @@ def render_research_home():
     if search_clicked and question.strip():
         st.session_state["search_query"] = question
         st.session_state["current_page"] = "results"
+
+        # Clear previous RAG answer and sources
+        st.session_state.pop("rag_answer", None)
+        st.session_state.pop("selected_evidence", None)
+
         st.rerun()

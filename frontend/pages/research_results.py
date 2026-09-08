@@ -14,57 +14,51 @@ def clean_html(html_str: str) -> str:
 
 
 def render_research_results():
-    query_text = st.session_state.get(
-        "search_query",
-        "What did we report about Company X in 2018?"
-    )
+
+    # --------------------------------------------------
+    # Get current query
+    # --------------------------------------------------
+    query_text = st.session_state.get("search_query", "").strip()
 
     if not query_text:
-        query_text = "What did we report about Company X in 2018?"
+        query_text = "What is India's youth unemployment rate in 2025?"
 
     # --------------------------------------------------
-    # Generate RAG answer
+    # Generate RAG answer for CURRENT question
     # --------------------------------------------------
-    if "rag_answer" not in st.session_state:
+    if (
+        "rag_answer" not in st.session_state
+        or st.session_state.get("rag_question") != query_text
+    ):
         with st.spinner("Researching the archive..."):
             try:
                 st.session_state["rag_answer"] = answer_question(query_text)
+                st.session_state["rag_question"] = query_text
             except Exception as e:
                 st.session_state["rag_answer"] = (
                     f"Unable to generate an answer: {e}"
                 )
+                st.session_state["rag_question"] = query_text
 
     answer = st.session_state["rag_answer"]
 
     # --------------------------------------------------
-    # Container wrapper
-    # --------------------------------------------------
-    st.markdown(
-        '<div class="results-page-wrapper">',
-        unsafe_allow_html=True
-    )
-
-    # --------------------------------------------------
-    # Back to Search Navigation
+    # Back to Search
     # --------------------------------------------------
     col_back, _ = st.columns([2, 8])
 
     with col_back:
-        if st.button(
-            "← Back to Search",
-            key="back_to_search_btn"
-        ):
+        if st.button("← Back to Search", key="back_to_search_btn"):
             st.session_state["current_page"] = "home"
             st.session_state.pop("rag_answer", None)
+            st.session_state.pop("rag_question", None)
+            st.session_state.pop("selected_evidence", None)
             st.rerun()
 
     # --------------------------------------------------
-    # Original Query Header Card
+    # Original Query
     # --------------------------------------------------
-    editing_query = st.session_state.get(
-        "editing_query",
-        False
-    )
+    editing_query = st.session_state.get("editing_query", False)
 
     if editing_query:
 
@@ -77,9 +71,12 @@ def render_research_results():
 
             if st.form_submit_button("Update Search"):
 
-                st.session_state["search_query"] = new_query
+                st.session_state["search_query"] = new_query.strip()
                 st.session_state["editing_query"] = False
+
                 st.session_state.pop("rag_answer", None)
+                st.session_state.pop("rag_question", None)
+                st.session_state.pop("selected_evidence", None)
 
                 st.rerun()
 
@@ -88,7 +85,9 @@ def render_research_results():
         query_card_html = clean_html(
             f"""
             <div class="original-query-card">
+
                 <div class="query-avatar-box">
+
                     <svg width="20" height="20"
                         viewBox="0 0 24 24"
                         fill="none"
@@ -101,10 +100,13 @@ def render_research_results():
                         a4 4 0 0 0-4 4v2"></path>
 
                         <circle cx="12" cy="7" r="4"></circle>
+
                     </svg>
+
                 </div>
 
                 <div class="query-content">
+
                     <div class="query-label">
                         ORIGINAL QUERY
                     </div>
@@ -112,6 +114,7 @@ def render_research_results():
                     <div class="query-text">
                         "{query_text}"
                     </div>
+
                 </div>
 
                 <div class="query-edit-btn-wrapper">
@@ -137,12 +140,12 @@ def render_research_results():
         )
 
     st.markdown(
-        "<div style='height: 16px;'></div>",
+        "<div style='height:16px;'></div>",
         unsafe_allow_html=True
     )
 
     # --------------------------------------------------
-    # Two Column Layout
+    # Two columns
     # --------------------------------------------------
     col_left, col_right = st.columns(
         [1.85, 1.0],
@@ -194,20 +197,27 @@ def render_research_results():
             unsafe_allow_html=True
         )
 
-        # ----------------------------------------------
-        # REAL RAG ANSWER
-        # ----------------------------------------------
+        # --------------------------------------------------
+        # Display answer
+        # --------------------------------------------------
         if answer.startswith("Unable to generate an answer:"):
+
             st.error(answer)
-            if st.button("🔄 Retry Query", key="retry_rag_query_btn"):
+
+            if st.button(
+                "🔄 Retry Query",
+                key="retry_rag_query_btn"
+            ):
                 st.session_state.pop("rag_answer", None)
+                st.session_state.pop("rag_question", None)
                 st.rerun()
+
         else:
             st.markdown(answer)
 
-        # ----------------------------------------------
+        # --------------------------------------------------
         # Footer
-        # ----------------------------------------------
+        # --------------------------------------------------
         st.markdown(
             clean_html(
                 """
@@ -266,25 +276,29 @@ def render_research_results():
             unsafe_allow_html=True
         )
 
-        # ----------------------------------------------
-        # Extract source filenames from RAG answer
-        # ----------------------------------------------
+        # --------------------------------------------------
+        # Extract source filenames from answer
+        # --------------------------------------------------
+    
         source_files = []
 
         for line in answer.splitlines():
-
             line = line.strip()
 
-            if line.startswith("* `") and line.endswith("`"):
+            if line.lower().startswith("source:"):
+                filename = line.split(":", 1)[1].strip().strip("`").strip()
 
-                filename = line[3:-1]
-
-                if filename not in source_files:
+                if filename and filename not in source_files:
                     source_files.append(filename)
 
-        # ----------------------------------------------
-        # Display retrieved sources
-        # ----------------------------------------------
+            elif line.startswith("* `") and line.endswith("`"):
+                filename = line[3:-1].strip()
+
+                if filename and filename not in source_files:
+                    source_files.append(filename)
+        # --------------------------------------------------
+        # Display sources
+        # --------------------------------------------------
         if source_files:
 
             for index, filename in enumerate(source_files):
@@ -309,21 +323,18 @@ def render_research_results():
                     source_data["date"],
                     source_data["title"]
                 ):
+
                     st.session_state["selected_evidence"] = source_data
                     st.rerun()
 
         else:
 
-            st.info(
-                "No source documents were identified."
-            )
+            st.info("No source documents were identified.")
 
     # ==================================================
-    # Evidence Modal
+    # Evidence
     # ==================================================
-    selected = st.session_state.get(
-        "selected_evidence"
-    )
+    selected = st.session_state.get("selected_evidence")
 
     if selected:
 
@@ -334,11 +345,3 @@ def render_research_results():
             excerpt=selected["excerpt"],
             relevance=selected["relevance"]
         )
-
-    # --------------------------------------------------
-    # Close wrapper
-    # --------------------------------------------------
-    st.markdown(
-        "</div>",
-        unsafe_allow_html=True
-    )
