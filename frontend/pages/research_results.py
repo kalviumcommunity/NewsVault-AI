@@ -197,7 +197,13 @@ def render_research_results():
         # ----------------------------------------------
         # REAL RAG ANSWER
         # ----------------------------------------------
-        st.markdown(answer)
+        if answer.startswith("Unable to generate an answer:"):
+            st.error(answer)
+            if st.button("🔄 Retry Query", key="retry_rag_query_btn"):
+                st.session_state.pop("rag_answer", None)
+                st.rerun()
+        else:
+            st.markdown(answer)
 
         # ----------------------------------------------
         # Footer

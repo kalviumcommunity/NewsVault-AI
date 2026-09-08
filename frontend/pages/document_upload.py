@@ -7,23 +7,16 @@ def clean_html(html_str: str) -> str:
 
 
 def render_document_upload():
-    st.markdown('<div class="upload-page-container">', unsafe_allow_html=True)
-
+    # Page Header matching main.css design
     header_html = clean_html("""
-    <div>
-    st.markdown('<div class="document-upload-page">', unsafe_allow_html=True)
-
-    # 1. Page Header Section
-    header_html = clean_html("""
-    <div class="upload-page-header">
-        <h1 class="upload-page-title">UPLOAD ARCHIVE DOCUMENTS</h1>
-        <p class="upload-page-subtitle">Securely upload documents for AI processing and analysis.</p>
+    <div class="document-upload-page">
+        <div class="upload-page-header">
+            <h1 class="upload-page-title">UPLOAD ARCHIVE DOCUMENTS</h1>
+            <p class="upload-page-subtitle">Securely upload documents for AI processing and analysis.</p>
+        </div>
     </div>
     """)
     st.markdown(header_html, unsafe_allow_html=True)
 
-    # Render Upload Box Component
-    # 2. Upload Box Component
+    # Render actual upload card component
     render_upload_box()
-
-    st.markdown('</div>', unsafe_allow_html=True)
