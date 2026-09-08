@@ -7,6 +7,10 @@ def clean_html(html_str: str) -> str:
 
 
 def render_document_upload():
+    st.markdown('<div class="upload-page-container">', unsafe_allow_html=True)
+
+    header_html = clean_html("""
+    <div>
     st.markdown('<div class="document-upload-page">', unsafe_allow_html=True)
 
     # 1. Page Header Section
@@ -18,6 +22,7 @@ def render_document_upload():
     """)
     st.markdown(header_html, unsafe_allow_html=True)
 
+    # Render Upload Box Component
     # 2. Upload Box Component
     render_upload_box()
 

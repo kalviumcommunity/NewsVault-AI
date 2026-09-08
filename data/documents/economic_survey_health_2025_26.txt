@@ -1,0 +1,267 @@
+
+print page button
+PIB Backgrounder
+azadi ka amrit mahotsav
+Redefining Growth: India's Revised GDP Estimates and the New Measurement Framework
+Posted On: 27 FEB 2026 9:52PM by PIB Delhi
+Key Takeaways
+
+· Real GDP growth for 2025-26 is estimated at 7.6%, higher than the 7.1% recorded in 2024-25
+
+· Base year for GDP Estimates has been revised from 2011–12 to 2022–23 to better reflect India’s evolving economic structure.
+
+· The revised GDP series strengthens estimation by integrating new, improved data sources such as ASUSE, PLFS, GST, PFMS etc.
+
+ 
+
+Introduction
+
+India’s growth trajectory is increasingly being shaped not only by economic performance but also by the quality and credibility of its statistical systems. In this direction, the comprehensive overview of India’s latest Gross Domestic Product (GDP) estimates with base year 2022-23, reflect the evolving momentum of the economy in comparison with the previous financial years.
+
+The real annual GDP growth for FY 2025-26 is estimated at 7.6%, higher than the 7.1% recorded in FY 2024-25, while nominal GDP, measured at current prices, is projected to grow by 8.6% during FY 2025-26. Within this, the manufacturing sector has recorded double-digit growth in both FY 2023-24 and FY 2025-26, emerging as a key contributor to the economy’s resilient performance. The secondary and tertiary sectors have strengthened overall economic performance, recording growth rates exceeding 9.0% in FY 2025-26. Also, the ‘Trade, Repair, Hotels, Transport, Communication and Services related to Broadcasting and Storage’ sector recorded a growth rate of 10.1% at constant prices in FY 2025-26.
+
+The steady upward trajectory in India's economic progress is also reflected in the quarterly results. The real GDP at Constant Prices for the period October-December (Q3) of FY 2025-26 is estimated at ₹84.54 lakh crore, marking a robust growth of 7.8%. This growth has progressively accelerated from 7.1% in Q3 of FY 2023-24 and 7.4% in Q3 of FY 2024-25, underscoring the sustained resilience and strengthening of the Indian economy.
+
+GDP is the value of final goods and services produced within a country in an accounting period.
+
+ 
+
+The new series of GDP estimates includes key changes to better capture the progress of the economy over the years. The compilation is based on Benchmark-Indicator methodology in which the estimates computed for the previous financial year are extrapolated using the relevant indicators reflecting the performance of various economic and institutional sectors.
+
+Recalibrating GDP Estimation for India’s Transforming Dynamic Economy
+
+GDP is the most widely used indicator of an economy’s size and overall health. By tracking changes in GDP over time, one can assess whether an economy is expanding or contracting and draw broad inferences about improvements in living standards. Consequently, policymakers, businesses, and financial institutions rely on GDP trends to guide economic planning and decision-making.
+
+
+
+
+
+ 
+
+Calculation of quarterly GDP estimates
+
+National Statistical Office (NSO) & Ministry of Statistics and Programme Implementation (MoSPI) calculate the quarterly GDP estimates using Benchmark-Indicator- a standard method used worldwide following the System of National Accounts (SNA) 2008 and IMF’s Quarterly National Accounts Manual 2017. The method works as follows:
+
+Annual GDP estimates act as a reference point/ benchmark.
+High-frequency data, like monthly or quarterly indicators, are applied to these benchmark estimates to estimate quarterly GDP.
+For comparisons across time to be meaningful, GDP estimates must be based on consistent methodologies, data sources, and base years. Any revision in measurement frameworks must therefore be carefully designed to ensure continuity and reliability.
+
+Recognising this, India’s statistical system has undergone comprehensive modernisation to better reflect the realities of a rapidly evolving economy. Key reforms include revising the base years of GDP and price indices, strengthening the measurement of the informal and services sectors, improving labour market statistics, adopting advanced survey methods and technology, and enhancing transparency through wider stakeholder engagement.
+
+Collectively, these reforms aim to enhance the timeliness, depth, and credibility of India’s official statistics, thereby strengthening the foundation for evidence-based policymaking.
+
+Decoding Base Year
+
+As per National Accounts Statistics, which provides data on the national income, production, and expenditure aggregates of the Indian economy, the base year is the reference year whose prices are used to calculate real growth.
+
+Rebasing & frequency of base year revisions
+
+ 
+
+Rebasing is the process of updating the base year using revised and improved data to reflect the current structure of the economy. The new base then serves as the reference point for estimating GDP and its components, as well as key indicators such as the Consumer Price Index (CPI) and the Index of Industrial Production (IIP) going forward.
+
+A key reform has been the revision of the GDP base year from 2011–12 to 2022–23 to better reflect India’s evolving economic structure.
+
+ 
+
+Why GDP base year has been revised to FY 2022-23
+
+ 
+
+DID YOU KNOW?
+
+The year 2022–23 has been selected as the new base year as it represents the most recent “normal” period following the disruptions of 2019–2021. The years 2019–20 and 2020–21 were heavily impacted by the COVID-19 pandemic, which temporarily distorted consumption trends and industrial activity.
+
+The base year is revised periodically to reflect structural shifts in the economy and to improve the accuracy of economic estimates. Such updates allow for methodological refinements and the integration of more comprehensive and reliable data sources.
+
+Over the past decade, India’s economy has evolved considerably, with the expansion of renewable energy and digital services, alongside changes in consumption patterns and investment behaviour. Rebasing enables GDP and related indices to better capture the contribution of emerging sectors, shifts in relative prices, and advances in technology and productivity.
+
+At the same time, rapid digitisation has expanded the availability of high-frequency data, strengthening the precision of national accounts. Real-time systems such as e-Vahan (vehicle registrations), the Public Financial Management System (PFMS), and the GST network now provide granular economic insights that enhance the robustness of GDP estimates.
+
+Besides, periodic revisions also support alignment with international best practices recommended by the UN Statistical Commission, ensuring that India’s statistical framework remains methodologically sound and globally comparable, particularly in areas such as digital economy measurement and supply-use tables.
+
+
+
+Modernizing India’s GDP Estimation
+
+The revised GDP series strengthens estimation by integrating several new and improved data sources. The improvements reduce dependence on proxy indicators and ensure that national income estimates better reflect the evolving structure of the economy.
+
+Data sources being used in new series
+
+Household Sector Measurement: Earlier, estimates for the household sector relied largely on growth rates between benchmark surveys or proxy indicators. In the revised series, actual level estimates are being derived from regular annual surveys such as the Annual Survey of Unincorporated Sector Enterprises (ASUSE) and the Periodic Labour Force Survey (PLFS). This shift enables more accurate and timely assessment of the sector’s dynamism.
+
+Use of GST Data: GST data supports the allocation of all-India private corporate sector estimates across states and is used for cross-validation in annual accounts. It also plays a key role in quarterly estimation and as an indicator in the compilation of Quarterly National Accounts. The new series makes wider and more systematic use of GST data across manufacturing and non-financial services sectors.
+
+e-Vahan Database: Data from the e-Vahan portal are being utilised to estimate Private Final Consumption Expenditure (PFCE) related to road transport services. PFCE is the expenditure incurred on final consumption of goods and services by the resident households of the country.
+
+Public Finance Management System (PFMS): PFMS data is being used to compile central government accounts and distribute them across states. This enables the use of actual expenditure figures at the First Revised Estimates (FRE) stage, rather than relying on Revised Estimates (RE). PFMS is a web-based online system that provides modules for end-to-end digital payments, collection of receipts, accounting, reconciliation, and financial reporting.
+
+Incorporation of Recent Studies: Updated rates and ratios based on recent expert studies have been incorporated to improve estimation quality. These include:
+
+A grass and fodder study by the Indian Grassland and Fodder Research Institute (agriculture)
+Fisheries studies by the Central Marine Fisheries Research Institute and the Central Inland Fisheries Research Institute
+Study on milk and milk products by the National Dairy Research Institute (for PFCE)
+Study on transport services by Jawaharlal Nehru University (for PFCE)
+Together, these enhancements improve the robustness, granularity, and reliability of national income estimates.
+
+Key Methodological Improvements in the New GDP Series
+
+ 
+
+The revised GDP series introduces several methodological enhancements to improve accuracy, consistency, and sectoral representation:
+
+A deflator aims to break down any change in prices into a pure price change between two time periods for a like-for-like product.
+
+Refined Deflation Techniques: Double deflation is now applied in manufacturing and agriculture, while single extrapolation is used in other sectors. Single deflation has been discontinued. Deflators are applied at a more granular level, with over 260 item-level CPI indices incorporated.
+
+Integration of Supply and Use Tables (SUT): The SUT framework has been aligned with National Accounts to reduce discrepancies between production- and expenditure-based GDP estimates. By matching total supply with total demand, this approach improves internal consistency.
+
+Updated Rates and Ratios: Compilation parameters have been revised using recent survey findings and studies conducted by MoSPI in collaboration with expert institutions.
+
+Segregation of Multi-Activity Corporations: Previously, value added by diversified enterprises was assigned to their principal activity. With the availability of MGT-7/7A filings (which report activity-wise turnover shares), value added is now distributed across activities more accurately.
+
+Improved Estimation of Private Final Consumption Expenditure (PFCE):
+A mixed methodology is adopted, combining enhanced use of the Household Consumer Expenditure Survey, direct estimation from production and administrative data, and the commodity flow approach. The updated COICOP 2018 classification has also been implemented. The Classification of Individual Consumption According to Purpose (COICOP) is the international reference classification of household expenditure.
+
+Sectoral Coverage of Revised Framework
+
+With several sector-specific refinements, the revised quarterly compilation framework has been aligned more closely with the Annual National Accounts methodology in terms of sectoral classification, deflation strategies, and estimation practices. The harmonization also ensures greater consistency between quarterly and annual GDP and Gross Value Added (GVA) estimates.
+
+Notably, deflators such as Consumer Price Index (CPI), Wholesale Price Index (WPI), Unit Value Index, etc are being used at more granular level by moving from aggregate level in old series to item-group level in new series.
+
+Inclusion of Hired Domestic Workers in GDP Estimation  
+
+The services of hired domestic workers are classified as “activities of households as employers of domestic personnel” and are included in GDP estimation. Their contribution is calculated using data on the number of such workers and their wages, as captured annually.
+
+Capturing Digital, Platform and Gig Economy Activities in the Revised GDP Series
+
+Digital services, intermediary platforms and related activities in the corporate sector were already covered through MCA-21 filings, e-Governance initiative that offers availability of all registry related services including filing of documents, registration of companies and public access to corporate information through a secure interactive portal.  The new series includes unincorporated enterprises, self-employed individuals and informal workers, allowing their contribution to GDP to be captured more accurately on an annual basis.
+
+Key Data Sources for Estimating the General Government Sector
+
+The estimates for the General Government sector are primarily compiled using budget documents of the Central and State Governments—such as the Receipt Budget and Detailed Demands for Grants of various Ministries and Departments—along with the annual accounts of local bodies and autonomous institutions.
+
+The new series incorporates several improvements to strengthen these estimates. These include-
+
+Adjustments to account for the rollout of the National Pension System (NPS) alongside the continued operation of the Old Pension Scheme (OPS)
+Imputation of the government-provided accommodation in place of House Rent Allowance (HRA).
+Improved coverage of local bodies and autonomous institutions
+The adoption of a volume extrapolation method for estimating product subsidies at constant prices.
+ 
+
+Together, these refinements enhance the accuracy and comprehensiveness of General Government sector estimates.
+
+Resolving Key Discrepancy in Supply & Use Table Framework
+
+The SUTs explain how goods and services flow through the economy. On the supply side, they show how products enter the economy- either through domestic production or imports. On the use side, they show how these products are consumed- as intermediate inputs by industries, final consumption by households, non-profit institutions serving households (NPISHs) and Government, gross capital formation, or exports.
+
+By linking supply with use for each product, the SUT framework provides a comprehensive mechanism to integrate and balance the production, income and expenditure approaches to GDP estimation.
+
+However, discrepancies between these approaches can arise due to differences in data coverage, time lags in data availability, reliance on proxy indicators for advance estimates, and variations in estimation methods.
+
+The System of National Accounts 2008 (SNA 2008), continued in SNA 2025, recommends two key approaches to address such discrepancies:
+
+Explicitly present the statistical discrepancy alongside official GDP estimates to enhance transparency.
+Reconcile production/income and production estimates using the Supply and Use Table framework, which strengthens consistency across datasets.
+In the new GDP series, the SUT framework is being systematically integrated into the compilation process. By applying the “product-balancing” principle (ensuring that total supply equals total use), the framework helps reconcile differences between production and expenditure estimates. As a result, statistical discrepancies in the final estimates are resolved, leading to internally consistent and more reliable GDP figures.
+
+Ensuring Consistency & Methodological Strength in GSDP Estimation
+
+GSDP is the value of all the goods and services produced within the boundaries of the State during a year.
+
+The NSO, under MoSPI, issues guidelines for estimating Gross State Domestic Product (GSDP) and provides technical support to States and Union Territories (UTs). This ensures that GSDP is compiled using uniform definitions, concepts and methodologies consistent with national accounts. The Directorates of Economics and Statistics (DES) in each State/UT prepare their GSDP estimates using state-specific data, largely drawn from common data sources.
+
+GSDP series with new base to be rolled out with major methodological improvements
+
+Following the release of GDP with the new base year 2022–23, NSO, MoSPI will communicate the required methodological changes and improvements to enable States/UTs to revise their GSDP estimates accordingly.
+
+Reduction in allocation-based methods in favour of direct estimation for some sectors or sub-sectors
+Reduced dependence on fixed ratios and proxy indicators
+Improved use of state-level economic data, and enhanced methodological consistency across States.
+Together, these measures strengthen the accuracy and comparability of GSDP estimates.
+
+The Way Forward
+
+With base year for GDP estimates being revised to 2022-23, CPI base year being revised to 2024 and IIP being revised to 2022-23, India’s statistical system is undergoing a comprehensive modernization.
+
+Continuing this momentum, the base year revision of WPI is also in progress. Until the updated WPI becomes available, the existing WPI will continue to be used as a deflator. Additionally, the MoSPI plans to incorporate the Producer Price Index (PPI) in the near future.  PPI measures the rate of change in the prices of goods and services bought and sold by producers.
+
+Other data scheduled to be released in the next few months include-
+
+Methodology and data sources used in compilation of estimates is due to be presented in MoSPI's publication 'Sources and Methods' and is likely to be released in the next few months.
+ 
+
+ 
+
+DID YOU KNOW?
+
+India compiles its GDP estimates in line with the 2008 System of National Accounts (SNA 2008), the internationally accepted statistical framework. With the United Nations Statistical Division transitioning to SNA 2025- expected to be adopted globally around 2029–30- India intends to align with the updated standard in its next base year revision.
+
+Additionally, as a subscriber to the IMF’s Special Data Dissemination Standard (SDDS), India adheres to globally recognised benchmarks of statistical quality and transparency. The revised GDP series remains fully consistent with international statistical standards.
+
+ 
+
+Back-series data is expected to be released by December 2026. As per established practice, estimates will be recalculated using the revised methodology up to the previous base year and then linked at a disaggregated level to extend the series back to 1950–51.
+
+Conclusion
+
+With real GDP now estimated to grow by 7.6% in FY 2025–26, the Indian economy is set to record strong and sustained expansion. This robust performance reinforces India’s growth momentum and strengthens its trajectory towards achieving the vision of Viksit Bharat, marked by higher productivity, resilience, and inclusive development.
+
+To this accord, the revision of the GDP base year to 2022–23 marks a significant step in aligning India’s national accounts with the realities of a rapidly transforming economy. By integrating improved data sources, strengthening methodological frameworks, expanding coverage of emerging sectors, and enhancing transparency through the SUT framework, the new series provides a more accurate, consistent and comprehensive measure of economic activity.
+
+The Indian statistical system is moving towards higher standards of precision, comparability and global alignment. Together, these efforts strengthen the credibility of official statistics and reinforce their role as a robust foundation for informed policymaking and sustainable economic planning.
+
+References
+
+Ministry of Statistics & Programme Implementation
+
+https://www.pib.gov.in/PressReleasePage.aspx?PRID=2129126&reg=3&lang=2
+
+https://www.mospi.gov.in/uploads/latestReleases/latest_release_1771587946242_979ab984-ab1d-4f5f-b412-66cff02f8e9d_Press_note_for_Release_of_Report_of_Committee_on_Constant_Price_Estimates.pdf
+
+Ministry of Finance
+
+https://pfms.nic.in/Home.aspx
+
+Ministry of Corporate Affairs
+
+https://www.pib.gov.in/newsite/erelcontent.aspx?relid=52614&reg=3&lang=2
+
+European Union
+
+https://ec.europa.eu/eurostat/statistics-explained/index.php?title=Beginners:GDP_-_What_is_gross_domestic_product_(GDP)
+
+Open Government Data Platform India
+
+https://www.data.gov.in/catalog/final-consumption-expenditure-constant-prices
+
+PIB Archives
+
+https://www.pib.gov.in/PressReleasePage.aspx?PRID=2219549&reg=3&lang=1
+
+https://www.pib.gov.in/PressNoteDetails.aspx?NoteId=155121&ModuleId=3&reg=3&lang=2
+
+Office for National Statistics
+
+https://www.ons.gov.uk/economy/inflationandpriceindices/methodologies/deflatorsandhowweusethemineconomicestimates
+
+United Nations
+
+https://unstats.un.org/unsd/classifications/unsdclassifications/COICOP_2018_-_pre-edited_white_cover_version_-_2018-12-26.pdf
+
+Click here to see pdf 
+
+***
+
+PIB Research
+
+ 
+
+
+(Release ID: 2233792) Visitor Counter : 101707
+Read this release in: Urdu , हिन्दी , Bengali , Bengali-TR , Gujarati
+Share on facebook
+Share on twitter
+Share on whatsapp
+Share on email
+Share on linkedin
