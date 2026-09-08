@@ -1,9 +1,8 @@
-from services.ai_service import embed_query
+from services.ai_service import generate_response
 
 question = "What was India's economic growth in 2025?"
 
-embedding = embed_query(question)
+answer = generate_response(question)
 
-print("Query embedding generated successfully!")
-print("Embedding dimension:", len(embedding))
-print("First 5 values:", embedding[:5])
+print("Gemini answer:")
+print(answer)
