@@ -1,7 +1,6 @@
 import streamlit as st
 
 from backend.services.rag_service import answer_question
-from backend.retrieval.retriever import retrieve_chunks
 from frontend.components.source_card import render_source_card
 from frontend.components.evidence_card import render_evidence_modal
 
@@ -56,7 +55,7 @@ def render_research_results():
     ).strip()
 
     # --------------------------------------------------
-    # Generate RAG answer for CURRENT query + filters
+    # Generate source-aware RAG answer
     # --------------------------------------------------
     if (
         "rag_answer" not in st.session_state
@@ -68,9 +67,10 @@ def render_research_results():
             try:
 
                 # ------------------------------------------
-                # Generate AI answer using all filters
+                # One RAG call:
+                # Retrieval + Gemini + Sources
                 # ------------------------------------------
-                st.session_state["rag_answer"] = answer_question(
+                rag_result = answer_question(
                     question=query_text,
                     date_start=date_start,
                     date_end=date_end,
@@ -81,39 +81,18 @@ def render_research_results():
                 )
 
                 # ------------------------------------------
-                # Retrieve actual chunks for Evidence View
+                # Store generated answer
                 # ------------------------------------------
-                retrieved_results = retrieve_chunks(
-                    question=query_text,
-                    top_k=5,
-                    date_start=date_start,
-                    date_end=date_end,
-                    content_type=content_type_filter,
-                    author=author_filter,
-                    topic=topic_filter,
-                    keywords=keywords_filter
+                st.session_state["rag_answer"] = (
+                    rag_result["answer"]
                 )
 
                 # ------------------------------------------
-                # Convert tuples into dictionaries
+                # Store the EXACT sources used by RAG
                 # ------------------------------------------
-                rag_sources = []
-
-                for (
-                    filename,
-                    chunk_index,
-                    content,
-                    similarity
-                ) in retrieved_results:
-
-                    rag_sources.append({
-                        "filename": filename,
-                        "chunk_index": chunk_index,
-                        "content": content,
-                        "similarity": similarity
-                    })
-
-                st.session_state["rag_sources"] = rag_sources
+                st.session_state["rag_sources"] = (
+                    rag_result["sources"]
+                )
 
                 st.session_state["rag_question"] = query_text
 
@@ -438,7 +417,7 @@ def render_research_results():
         )
 
         # --------------------------------------------------
-        # Get actual retrieved chunks
+        # Get sources returned by the SAME RAG call
         # --------------------------------------------------
         rag_sources = st.session_state.get(
             "rag_sources",
@@ -487,8 +466,14 @@ def render_research_results():
                 except (TypeError, ValueError):
                     relevance = ""
 
+                # ------------------------------------------
+                # Use the actual source ID from RAG
+                # ------------------------------------------
                 source_data = {
-                    "id": f"rag_source_{index}",
+                    "id": source.get(
+                        "id",
+                        f"rag_source_{index}"
+                    ),
                     "badge": "Archive",
                     "type": "report",
                     "date": "",
