@@ -10,11 +10,9 @@ def answer_question(
     author: str | None = None,
     topic: str | None = None,
     keywords: str | None = None
-) -> str:
+):
 
-    # --------------------------------------------------
-    # Retrieve filtered chunks
-    # --------------------------------------------------
+    # Retrieve relevant chunks using the selected filters
     results = retrieve_chunks(
         question=question,
         top_k=5,
@@ -26,45 +24,73 @@ def answer_question(
         keywords=keywords
     )
 
+    # No relevant information found
     if not results:
-        return (
-            "The archive does not contain sufficient information "
-            "to answer this question using the selected filters."
-        )
+        return {
+            "answer": (
+                "The archive does not contain sufficient information "
+                "to answer this question using the selected filters."
+            ),
+            "sources": []
+        }
 
-    # --------------------------------------------------
-    # Build archive context
-    # --------------------------------------------------
+    # Build source-aware context
     context_parts = []
 
-    for (
-        filename_result,
+    sources = []
+
+    for index, (
+        filename,
         chunk_index,
         content,
         similarity
-    ) in results:
+    ) in enumerate(results, start=1):
+
+        source_id = f"Source {index}"
 
         context_parts.append(
-            f"Source: {filename_result}\n"
-            f"Chunk: {chunk_index}\n"
-            f"Content:\n{content}"
+            f"""
+[{source_id}]
+Filename: {filename}
+Chunk: {chunk_index}
+Content:
+{content}
+"""
         )
+
+        sources.append({
+            "id": source_id,
+            "filename": filename,
+            "chunk_index": chunk_index,
+            "content": content,
+            "similarity": similarity
+        })
 
     context = "\n\n---\n\n".join(context_parts)
 
-    # --------------------------------------------------
-    # Gemini prompt
-    # --------------------------------------------------
     prompt = f"""
 You are NewsVault AI, a journalism research assistant.
 
 Answer the user's question using ONLY the information provided
-in the archive context below.
+in the archive context.
 
-If the context does not contain enough information to answer,
-clearly say that the archive does not contain sufficient information.
+Do not use outside knowledge.
+Do not invent facts.
 
-Do not invent facts or use outside knowledge.
+Every factual claim in your answer must be supported by one or
+more of the provided sources.
+
+Cite the source immediately after the relevant claim using:
+[Source 1]
+[Source 2]
+etc.
+
+If multiple sources support a claim, cite them like:
+[Source 1] [Source 3]
+
+If the archive does not contain enough information to answer
+the question, clearly say that the archive does not contain
+sufficient information.
 
 User question:
 {question}
@@ -74,11 +100,15 @@ Archive context:
 
 Instructions:
 - Give a clear and concise answer.
-- Mention relevant numbers, dates, and facts from the context.
-- Do not use information outside the archive context.
-- At the end, provide the source filename(s) used.
-- Format each source like this:
-  Source: filename.txt
+- Use only information from the archive context.
+- Include relevant numbers, dates, and facts.
+- Add source citations to factual claims.
+- Do not create or assume information not present in the sources.
 """
 
-    return generate_response(prompt)
+    answer = generate_response(prompt)
+
+    return {
+        "answer": answer,
+        "sources": sources
+    }
