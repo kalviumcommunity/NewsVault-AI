@@ -90,7 +90,7 @@ def render_filter_panel():
             )
 
         with col2:
-            author_options = ["All Authors", "John Doe", "Jane Smith", "Reuters", "TechCrunch"]
+            author_options = ["All Authors","Ministry of Finance","MoSPI","Government of India"]
             author_idx = author_options.index(st.session_state["filter_author"]) if st.session_state["filter_author"] in author_options else 0
             selected_author = st.selectbox(
                 "Author / Source",
@@ -121,10 +121,22 @@ def render_filter_panel():
                 st.rerun()
 
         with btn_col2:
-            if st.button("✨ Apply Filters", key="btn_apply_filters", type="primary", use_container_width=True):
+            if st.button(
+                "✨ Apply Filters", 
+                key="btn_apply_filters", 
+                type="primary", 
+                use_container_width=True):
                 st.session_state["filter_date_range"] = selected_range
                 st.session_state["filter_type"] = selected_type
                 st.session_state["filter_author"] = selected_author
                 st.session_state["filter_topic"] = selected_topic
                 st.session_state["filter_keywords"] = selected_keywords
-                st.rerun()
+
+                # Force RAG to retrieve again with the new filters
+                st.session_state.pop("rag_answer", None)
+                st.session_state.pop("rag_question", None)
+                st.session_state.pop("selected_evidence", None)
+
+                st.rerun()      
+
+
