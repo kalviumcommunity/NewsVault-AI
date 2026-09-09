@@ -7,10 +7,16 @@ from dotenv import load_dotenv
 from backend.services.ai_service import embed_query
 
 
+# --------------------------------------------------
+# Load environment variables
+# --------------------------------------------------
 BASE_DIR = Path(__file__).resolve().parents[2]
 load_dotenv(BASE_DIR / ".env")
 
 
+# --------------------------------------------------
+# Database connection
+# --------------------------------------------------
 def get_connection():
     return psycopg2.connect(
         host=os.getenv("DB_HOST"),
@@ -21,18 +27,35 @@ def get_connection():
     )
 
 
-def retrieve_chunks(question: str, top_k: int = 5):
+# --------------------------------------------------
+# Filter-aware vector retrieval
+# --------------------------------------------------
+def retrieve_chunks(
+    question: str,
+    top_k: int = 5,
+    date_start: int | None = None,
+    date_end: int | None = None,
+    content_type: str | None = None,
+    author: str | None = None,
+    topic: str | None = None,
+    keywords: str | None = None
+):
+
+    # --------------------------------------------------
+    # Create query embedding
+    # --------------------------------------------------
     query_embedding = embed_query(question)
 
-    embedding_string = "[" + ",".join(
-        str(value) for value in query_embedding
-    ) + "]"
+    embedding_string = (
+        "["
+        + ",".join(str(value) for value in query_embedding)
+        + "]"
+    )
 
-    conn = get_connection()
-    cursor = conn.cursor()
-
-    cursor.execute(
-        """
+    # --------------------------------------------------
+    # Base query
+    # --------------------------------------------------
+    query = """
         SELECT
             d.filename,
             c.chunk_index,
@@ -41,30 +64,97 @@ def retrieve_chunks(question: str, top_k: int = 5):
         FROM chunks c
         JOIN documents d
             ON d.id = c.document_id
+    """
+
+    # First parameter is the query embedding
+    params = [embedding_string]
+
+    conditions = []
+
+    # --------------------------------------------------
+    # Date filter
+    # --------------------------------------------------
+    if date_start is not None:
+        conditions.append(
+            "EXTRACT(YEAR FROM d.document_date) >= %s"
+        )
+        params.append(date_start)
+
+    if date_end is not None:
+        conditions.append(
+            "EXTRACT(YEAR FROM d.document_date) <= %s"
+        )
+        params.append(date_end)
+
+    # --------------------------------------------------
+    # Content type filter
+    # --------------------------------------------------
+    if content_type and content_type != "All Types":
+        conditions.append(
+            "d.content_type = %s"
+        )
+        params.append(content_type)
+
+    # --------------------------------------------------
+    # Author filter
+    # --------------------------------------------------
+    if author and author != "All Authors":
+        conditions.append(
+            "d.author = %s"
+        )
+        params.append(author)
+
+    # --------------------------------------------------
+    # Topic filter
+    # --------------------------------------------------
+    if topic and topic != "All Topics":
+        conditions.append(
+            "d.topic = %s"
+        )
+        params.append(topic)
+
+    # --------------------------------------------------
+    # Keyword filter
+    # --------------------------------------------------
+    if keywords:
+        conditions.append(
+            "c.content ILIKE %s"
+        )
+        params.append(f"%{keywords}%")
+
+    # --------------------------------------------------
+    # Add WHERE conditions
+    # --------------------------------------------------
+    if conditions:
+        query += " WHERE " + " AND ".join(conditions)
+
+    # --------------------------------------------------
+    # Vector similarity ranking
+    # --------------------------------------------------
+    query += """
         ORDER BY c.embedding <=> %s::vector
         LIMIT %s
-        """,
-        (embedding_string, embedding_string, top_k)
-    )
+    """
 
-    results = cursor.fetchall()
+    params.append(embedding_string)
+    params.append(top_k)
 
-    cursor.close()
-    conn.close()
+    # --------------------------------------------------
+    # Execute query
+    # --------------------------------------------------
+    conn = get_connection()
+    cursor = conn.cursor()
+
+    try:
+        cursor.execute(
+            query,
+            tuple(params)
+        )
+
+        results = cursor.fetchall()
+
+    finally:
+        cursor.close()
+        conn.close()
 
     return results
-
-
-if __name__ == "__main__":
-    question = "What is the current GDP growth rate of India?"
-
-    results = retrieve_chunks(question)
-
-    print("\nTop relevant chunks:\n")
-
-    for filename, chunk_index, content, similarity in results:
-        print(f"Source: {filename}")
-        print(f"Chunk: {chunk_index}")
-        print(f"Similarity: {similarity:.4f}")
-        print(f"Content: {content[:300]}...")
-        print("-" * 60)

@@ -1,8 +1,9 @@
 import streamlit as st
 
+from backend.services.rag_service import answer_question
+from backend.retrieval.retriever import retrieve_chunks
 from frontend.components.source_card import render_source_card
 from frontend.components.evidence_card import render_evidence_modal
-from backend.services.rag_service import answer_question
 
 
 def clean_html(html_str: str) -> str:
@@ -18,27 +19,112 @@ def render_research_results():
     # --------------------------------------------------
     # Get current query
     # --------------------------------------------------
-    query_text = st.session_state.get("search_query", "").strip()
+    query_text = st.session_state.get(
+        "search_query",
+        ""
+    ).strip()
 
     if not query_text:
         query_text = "What is India's youth unemployment rate in 2025?"
 
     # --------------------------------------------------
-    # Generate RAG answer for CURRENT question
+    # Get active filters
+    # --------------------------------------------------
+    date_start, date_end = st.session_state.get(
+        "filter_date_range",
+        (2015, 2025)
+    )
+
+    content_type_filter = st.session_state.get(
+        "filter_type",
+        "All Types"
+    )
+
+    author_filter = st.session_state.get(
+        "filter_author",
+        "All Authors"
+    )
+
+    topic_filter = st.session_state.get(
+        "filter_topic",
+        "All Topics"
+    )
+
+    keywords_filter = st.session_state.get(
+        "filter_keywords",
+        ""
+    ).strip()
+
+    # --------------------------------------------------
+    # Generate RAG answer for CURRENT query + filters
     # --------------------------------------------------
     if (
         "rag_answer" not in st.session_state
         or st.session_state.get("rag_question") != query_text
     ):
+
         with st.spinner("Researching the archive..."):
+
             try:
-                st.session_state["rag_answer"] = answer_question(query_text)
+
+                # ------------------------------------------
+                # Generate AI answer using all filters
+                # ------------------------------------------
+                st.session_state["rag_answer"] = answer_question(
+                    question=query_text,
+                    date_start=date_start,
+                    date_end=date_end,
+                    content_type=content_type_filter,
+                    author=author_filter,
+                    topic=topic_filter,
+                    keywords=keywords_filter
+                )
+
+                # ------------------------------------------
+                # Retrieve actual chunks for Evidence View
+                # ------------------------------------------
+                retrieved_results = retrieve_chunks(
+                    question=query_text,
+                    top_k=5,
+                    date_start=date_start,
+                    date_end=date_end,
+                    content_type=content_type_filter,
+                    author=author_filter,
+                    topic=topic_filter,
+                    keywords=keywords_filter
+                )
+
+                # ------------------------------------------
+                # Convert tuples into dictionaries
+                # ------------------------------------------
+                rag_sources = []
+
+                for (
+                    filename,
+                    chunk_index,
+                    content,
+                    similarity
+                ) in retrieved_results:
+
+                    rag_sources.append({
+                        "filename": filename,
+                        "chunk_index": chunk_index,
+                        "content": content,
+                        "similarity": similarity
+                    })
+
+                st.session_state["rag_sources"] = rag_sources
+
                 st.session_state["rag_question"] = query_text
+
             except Exception as e:
+
                 st.session_state["rag_answer"] = (
                     f"Unable to generate an answer: {e}"
                 )
+
                 st.session_state["rag_question"] = query_text
+                st.session_state["rag_sources"] = []
 
     answer = st.session_state["rag_answer"]
 
@@ -48,17 +134,43 @@ def render_research_results():
     col_back, _ = st.columns([2, 8])
 
     with col_back:
-        if st.button("← Back to Search", key="back_to_search_btn"):
+
+        if st.button(
+            "← Back to Search",
+            key="back_to_search_btn"
+        ):
+
             st.session_state["current_page"] = "home"
-            st.session_state.pop("rag_answer", None)
-            st.session_state.pop("rag_question", None)
-            st.session_state.pop("selected_evidence", None)
+
+            st.session_state.pop(
+                "rag_answer",
+                None
+            )
+
+            st.session_state.pop(
+                "rag_question",
+                None
+            )
+
+            st.session_state.pop(
+                "rag_sources",
+                None
+            )
+
+            st.session_state.pop(
+                "selected_evidence",
+                None
+            )
+
             st.rerun()
 
     # --------------------------------------------------
     # Original Query
     # --------------------------------------------------
-    editing_query = st.session_state.get("editing_query", False)
+    editing_query = st.session_state.get(
+        "editing_query",
+        False
+    )
 
     if editing_query:
 
@@ -69,14 +181,35 @@ def render_research_results():
                 value=query_text
             )
 
-            if st.form_submit_button("Update Search"):
+            if st.form_submit_button(
+                "Update Search"
+            ):
 
-                st.session_state["search_query"] = new_query.strip()
+                st.session_state["search_query"] = (
+                    new_query.strip()
+                )
+
                 st.session_state["editing_query"] = False
 
-                st.session_state.pop("rag_answer", None)
-                st.session_state.pop("rag_question", None)
-                st.session_state.pop("selected_evidence", None)
+                st.session_state.pop(
+                    "rag_answer",
+                    None
+                )
+
+                st.session_state.pop(
+                    "rag_question",
+                    None
+                )
+
+                st.session_state.pop(
+                    "rag_sources",
+                    None
+                )
+
+                st.session_state.pop(
+                    "selected_evidence",
+                    None
+                )
 
                 st.rerun()
 
@@ -131,6 +264,7 @@ def render_research_results():
             key="btn_edit_query",
             help="Edit query"
         ):
+
             st.session_state["editing_query"] = True
             st.rerun()
 
@@ -184,8 +318,13 @@ def render_research_results():
                     </div>
 
                     <div class="confidence-badge">
-                        <span class="confidence-dot">●</span>
+
+                        <span class="confidence-dot">
+                            ●
+                        </span>
+
                         Archive Grounded
+
                     </div>
 
                 </div>
@@ -200,7 +339,9 @@ def render_research_results():
         # --------------------------------------------------
         # Display answer
         # --------------------------------------------------
-        if answer.startswith("Unable to generate an answer:"):
+        if answer.startswith(
+            "Unable to generate an answer:"
+        ):
 
             st.error(answer)
 
@@ -208,11 +349,31 @@ def render_research_results():
                 "🔄 Retry Query",
                 key="retry_rag_query_btn"
             ):
-                st.session_state.pop("rag_answer", None)
-                st.session_state.pop("rag_question", None)
+
+                st.session_state.pop(
+                    "rag_answer",
+                    None
+                )
+
+                st.session_state.pop(
+                    "rag_question",
+                    None
+                )
+
+                st.session_state.pop(
+                    "rag_sources",
+                    None
+                )
+
+                st.session_state.pop(
+                    "selected_evidence",
+                    None
+                )
+
                 st.rerun()
 
         else:
+
             st.markdown(answer)
 
         # --------------------------------------------------
@@ -277,31 +438,54 @@ def render_research_results():
         )
 
         # --------------------------------------------------
-        # Extract source filenames from answer
+        # Get actual retrieved chunks
         # --------------------------------------------------
-    
-        source_files = []
+        rag_sources = st.session_state.get(
+            "rag_sources",
+            []
+        )
 
-        for line in answer.splitlines():
-            line = line.strip()
-
-            if line.lower().startswith("source:"):
-                filename = line.split(":", 1)[1].strip().strip("`").strip()
-
-                if filename and filename not in source_files:
-                    source_files.append(filename)
-
-            elif line.startswith("* `") and line.endswith("`"):
-                filename = line[3:-1].strip()
-
-                if filename and filename not in source_files:
-                    source_files.append(filename)
         # --------------------------------------------------
         # Display sources
         # --------------------------------------------------
-        if source_files:
+        if rag_sources:
 
-            for index, filename in enumerate(source_files):
+            displayed_files = set()
+
+            for index, source in enumerate(rag_sources):
+
+                filename = source.get(
+                    "filename",
+                    "Unknown source"
+                )
+
+                content = source.get(
+                    "content",
+                    ""
+                )
+
+                similarity = source.get(
+                    "similarity",
+                    0
+                )
+
+                # ------------------------------------------
+                # Display each document only once
+                # ------------------------------------------
+                if filename in displayed_files:
+                    continue
+
+                displayed_files.add(filename)
+
+                # ------------------------------------------
+                # Similarity percentage
+                # ------------------------------------------
+                try:
+                    relevance = (
+                        f"{float(similarity) * 100:.0f}%"
+                    )
+                except (TypeError, ValueError):
+                    relevance = ""
 
                 source_data = {
                     "id": f"rag_source_{index}",
@@ -309,13 +493,13 @@ def render_research_results():
                     "type": "report",
                     "date": "",
                     "title": filename,
-                    "excerpt": (
-                        "Source document retrieved from the "
-                        "NewsVault AI archive."
-                    ),
-                    "relevance": ""
+                    "excerpt": content,
+                    "relevance": relevance
                 }
 
+                # ------------------------------------------
+                # Source card
+                # ------------------------------------------
                 if render_source_card(
                     source_data["id"],
                     source_data["badge"],
@@ -324,17 +508,24 @@ def render_research_results():
                     source_data["title"]
                 ):
 
-                    st.session_state["selected_evidence"] = source_data
+                    st.session_state[
+                        "selected_evidence"
+                    ] = source_data
+
                     st.rerun()
 
         else:
 
-            st.info("No source documents were identified.")
+            st.info(
+                "No source documents were identified."
+            )
 
     # ==================================================
-    # Evidence
+    # Evidence View
     # ==================================================
-    selected = st.session_state.get("selected_evidence")
+    selected = st.session_state.get(
+        "selected_evidence"
+    )
 
     if selected:
 
