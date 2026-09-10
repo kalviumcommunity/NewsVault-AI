@@ -73,3 +73,68 @@ def get_document(document_id: int):
     finally:
         cursor.close()
         connection.close()
+
+
+
+def filter_documents(
+    document_date=None,
+    author=None,
+    document_type=None,
+    topic=None,
+    date_from=None,
+    date_to=None
+):
+    connection = get_connection()
+
+    try:
+        query = """
+            SELECT
+                id,
+                title,
+                filename,
+                document_type,
+                author,
+                document_date,
+                topic,
+                created_at
+            FROM documents
+        """
+
+        conditions = []
+        parameters = []
+
+        if document_date is not None:
+            conditions.append("document_date = %s")
+            parameters.append(document_date)
+
+        if date_from is not None:
+            conditions.append("document_date >= %s")
+            parameters.append(date_from)
+
+        if date_to is not None:
+            conditions.append("document_date <= %s")
+            parameters.append(date_to)
+
+        if author is not None:
+            conditions.append("author = %s")
+            parameters.append(author)
+
+        if document_type is not None:
+            conditions.append("document_type = %s")
+            parameters.append(document_type)
+
+        if topic is not None:
+            conditions.append("topic = %s")
+            parameters.append(topic)
+
+        if conditions:
+            query += " WHERE " + " AND ".join(conditions)
+
+        query += " ORDER BY document_date DESC, id DESC"
+
+        with connection.cursor() as cursor:
+            cursor.execute(query, parameters)
+            return cursor.fetchall()
+
+    finally:
+        connection.close()
