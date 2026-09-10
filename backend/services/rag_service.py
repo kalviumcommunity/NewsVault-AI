@@ -36,7 +36,6 @@ def answer_question(
 
     # Build source-aware context
     context_parts = []
-
     sources = []
 
     for index, (
@@ -68,44 +67,47 @@ Content:
 
     context = "\n\n---\n\n".join(context_parts)
 
+    # Evidence-aware Gemini prompt
     prompt = f"""
 You are NewsVault AI, a journalism research assistant.
 
-Answer the user's question using ONLY the information provided
-in the archive context.
+Your ONLY source of information is the retrieved archive evidence
+provided below.
 
-Do not use outside knowledge.
-Do not invent facts.
+STRICT EVIDENCE RULES:
 
-Every factual claim in your answer must be supported by one or
-more of the provided sources.
-
-Cite the source immediately after the relevant claim using:
-[Source 1]
-[Source 2]
-etc.
-
-If multiple sources support a claim, cite them like:
-[Source 1] [Source 3]
-
-If the archive does not contain enough information to answer
-the question, clearly say that the archive does not contain
-sufficient information.
+- Use ONLY information explicitly present in the retrieved evidence.
+- Do NOT use outside knowledge or information from your training.
+- Do NOT invent, assume, estimate, predict, or fill in missing information.
+- Every factual claim must be directly supported by the retrieved evidence.
+- Cite the supporting source immediately after each factual claim using
+  [Source 1], [Source 2], etc.
+- If multiple sources support a claim, cite all relevant sources.
+- Never cite a source that does not support the claim.
+- If the evidence supports only part of the question, answer only the
+  supported part and clearly mention what information is missing.
+- If the retrieved evidence does not contain enough information to
+  answer the question, clearly state that the archive does not contain
+  sufficient information.
 
 User question:
 {question}
 
-Archive context:
+Retrieved archive evidence:
 {context}
 
 Instructions:
+
 - Give a clear and concise answer.
-- Use only information from the archive context.
-- Include relevant numbers, dates, and facts.
-- Add source citations to factual claims.
-- Do not create or assume information not present in the sources.
+- Use only the retrieved archive evidence.
+- Include numbers, dates, and facts only when supported by the evidence.
+- Add [Source X] citations to factual claims.
+- Do not add information that is not present in the retrieved evidence.
+- Do not answer using general knowledge.
+- Do not guess or make assumptions.
 """
 
+    # Generate answer using only the retrieved evidence
     answer = generate_response(prompt)
 
     return {
