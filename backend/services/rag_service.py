@@ -2,6 +2,12 @@ from backend.retrieval.retriever import retrieve_chunks
 from backend.services.ai_service import generate_response
 
 
+INSUFFICIENT_CONTEXT_MESSAGE = (
+    "The archive does not contain sufficient information "
+    "to answer this question using the retrieved evidence."
+)
+
+
 def answer_question(
     question: str,
     date_start: int | None = None,
@@ -12,7 +18,9 @@ def answer_question(
     keywords: str | None = None
 ):
 
-    # Retrieve relevant chunks using the selected filters
+    # --------------------------------------------------
+    # Retrieve relevant chunks using selected filters
+    # --------------------------------------------------
     results = retrieve_chunks(
         question=question,
         top_k=5,
@@ -24,17 +32,19 @@ def answer_question(
         keywords=keywords
     )
 
-    # No relevant information found
+    # --------------------------------------------------
+    # Handle insufficient archive context
+    # --------------------------------------------------
     if not results:
         return {
-            "answer": (
-                "The archive does not contain sufficient information "
-                "to answer this question using the selected filters."
-            ),
-            "sources": []
+            "answer": INSUFFICIENT_CONTEXT_MESSAGE,
+            "sources": [],
+            "insufficient_context": True
         }
 
+    # --------------------------------------------------
     # Build source-aware context
+    # --------------------------------------------------
     context_parts = []
     sources = []
 
@@ -67,7 +77,9 @@ Content:
 
     context = "\n\n---\n\n".join(context_parts)
 
+    # --------------------------------------------------
     # Evidence-aware Gemini prompt
+    # --------------------------------------------------
     prompt = f"""
 You are NewsVault AI, a journalism research assistant.
 
@@ -87,8 +99,10 @@ STRICT EVIDENCE RULES:
 - If the evidence supports only part of the question, answer only the
   supported part and clearly mention what information is missing.
 - If the retrieved evidence does not contain enough information to
-  answer the question, clearly state that the archive does not contain
-  sufficient information.
+  answer the question, return exactly this message:
+
+"The archive does not contain sufficient information to answer this
+question using the retrieved evidence."
 
 User question:
 {question}
@@ -107,10 +121,13 @@ Instructions:
 - Do not guess or make assumptions.
 """
 
-    # Generate answer using only the retrieved evidence
+    # --------------------------------------------------
+    # Generate evidence-grounded answer
+    # --------------------------------------------------
     answer = generate_response(prompt)
 
     return {
         "answer": answer,
-        "sources": sources
+        "sources": sources,
+        "insufficient_context": False
     }
