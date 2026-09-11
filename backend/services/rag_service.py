@@ -8,6 +8,9 @@ INSUFFICIENT_CONTEXT_MESSAGE = (
 )
 
 
+# --------------------------------------------------
+# RAG answer generation
+# --------------------------------------------------
 def answer_question(
     question: str,
     date_start: int | None = None,
@@ -19,11 +22,12 @@ def answer_question(
 ):
 
     # --------------------------------------------------
-    # Retrieve relevant chunks using selected filters
+    # Retrieve relevant chunks
     # --------------------------------------------------
     results = retrieve_chunks(
         question=question,
         top_k=5,
+        similarity_threshold=0.70,
         date_start=date_start,
         date_end=date_end,
         content_type=content_type,
@@ -33,7 +37,7 @@ def answer_question(
     )
 
     # --------------------------------------------------
-    # Handle insufficient archive context
+    # Handle insufficient context
     # --------------------------------------------------
     if not results:
         return {
@@ -43,10 +47,13 @@ def answer_question(
         }
 
     # --------------------------------------------------
-    # Build source-aware context
+    # Limit retrieved context
     # --------------------------------------------------
+    MAX_CONTEXT_CHARS = 12000
+
     context_parts = []
     sources = []
+    current_context_length = 0
 
     for index, (
         filename,
@@ -57,15 +64,24 @@ def answer_question(
 
         source_id = f"Source {index}"
 
-        context_parts.append(
-            f"""
-[{source_id}]
-Filename: {filename}
-Chunk: {chunk_index}
-Content:
-{content}
-"""
+        source_block = (
+            f"[{source_id}]\n"
+            f"Filename: {filename}\n"
+            f"Chunk: {chunk_index}\n"
+            f"Content:\n{content}"
         )
+
+        separator_length = 8
+
+        if (
+            current_context_length
+            + len(source_block)
+            + separator_length
+            > MAX_CONTEXT_CHARS
+        ):
+            break
+
+        context_parts.append(source_block)
 
         sources.append({
             "id": source_id,
@@ -75,34 +91,55 @@ Content:
             "similarity": similarity
         })
 
+        current_context_length += (
+            len(source_block)
+            + separator_length
+        )
+
+    # --------------------------------------------------
+    # Handle case where context limit removes all chunks
+    # --------------------------------------------------
+    if not context_parts:
+        return {
+            "answer": INSUFFICIENT_CONTEXT_MESSAGE,
+            "sources": [],
+            "insufficient_context": True
+        }
+
     context = "\n\n---\n\n".join(context_parts)
 
     # --------------------------------------------------
-    # Evidence-aware Gemini prompt
+    # Optimized evidence-aware Gemini prompt
     # --------------------------------------------------
     prompt = f"""
 You are NewsVault AI, a journalism research assistant.
 
-Your ONLY source of information is the retrieved archive evidence
-provided below.
+Answer the user's question using ONLY the retrieved archive evidence.
 
-STRICT EVIDENCE RULES:
+STRICT RULES:
 
-- Use ONLY information explicitly present in the retrieved evidence.
-- Do NOT use outside knowledge or information from your training.
-- Do NOT invent, assume, estimate, predict, or fill in missing information.
-- Every factual claim must be directly supported by the retrieved evidence.
-- Cite the supporting source immediately after each factual claim using
-  [Source 1], [Source 2], etc.
-- If multiple sources support a claim, cite all relevant sources.
-- Never cite a source that does not support the claim.
-- If the evidence supports only part of the question, answer only the
-  supported part and clearly mention what information is missing.
-- If the retrieved evidence does not contain enough information to
-  answer the question, return exactly this message:
+1. Do not use outside knowledge or information from your training.
+2. Do not invent, assume, estimate, predict, or fill missing information.
+3. Every factual claim must be supported by the retrieved evidence.
+4. Cite factual claims immediately using [Source 1], [Source 2], etc.
+5. Use multiple source citations when a claim is supported by multiple sources.
+6. Never cite a source that does not support the claim.
+7. If only part of the question is supported, answer only that part and
+   clearly state what information is missing.
+8. If the evidence is insufficient, return exactly:
 
 "The archive does not contain sufficient information to answer this
 question using the retrieved evidence."
+
+ANSWER STYLE:
+
+- Be concise and directly answer the question.
+- Do not repeat the same fact or idea.
+- Combine overlapping information from multiple sources.
+- Do not unnecessarily restate the question.
+- Do not add a conclusion that is not supported by the evidence.
+- Prefer short paragraphs or bullet points when appropriate.
+- Include numbers and dates only when supported by the evidence.
 
 User question:
 {question}
@@ -110,22 +147,17 @@ User question:
 Retrieved archive evidence:
 {context}
 
-Instructions:
-
-- Give a clear and concise answer.
-- Use only the retrieved archive evidence.
-- Include numbers, dates, and facts only when supported by the evidence.
-- Add [Source X] citations to factual claims.
-- Do not add information that is not present in the retrieved evidence.
-- Do not answer using general knowledge.
-- Do not guess or make assumptions.
+Now provide the most relevant, concise, evidence-grounded answer.
 """
 
     # --------------------------------------------------
-    # Generate evidence-grounded answer
+    # Generate answer
     # --------------------------------------------------
     answer = generate_response(prompt)
 
+    # --------------------------------------------------
+    # Return answer and exact supporting sources
+    # --------------------------------------------------
     return {
         "answer": answer,
         "sources": sources,

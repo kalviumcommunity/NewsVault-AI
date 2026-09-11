@@ -33,6 +33,7 @@ def get_connection():
 def retrieve_chunks(
     question: str,
     top_k: int = 5,
+    similarity_threshold: float = 0.70,
     date_start: int | None = None,
     date_end: int | None = None,
     content_type: str | None = None,
@@ -66,9 +67,7 @@ def retrieve_chunks(
             ON d.id = c.document_id
     """
 
-    # First parameter is the query embedding
     params = [embedding_string]
-
     conditions = []
 
     # --------------------------------------------------
@@ -156,5 +155,14 @@ def retrieve_chunks(
     finally:
         cursor.close()
         conn.close()
+
+    # --------------------------------------------------
+    # Remove low-relevance chunks
+    # --------------------------------------------------
+    results = [
+        result
+        for result in results
+        if result[3] >= similarity_threshold
+    ]
 
     return results
