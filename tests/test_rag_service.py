@@ -44,7 +44,7 @@ def test_answer_question_with_results(
 
 
 # --------------------------------------------------
-# Test 2: Filters are passed to retrieval
+# Test 2: Filters and similarity threshold are passed
 # --------------------------------------------------
 @patch("backend.services.rag_service.generate_response")
 @patch("backend.services.rag_service.retrieve_chunks")
@@ -79,6 +79,7 @@ def test_answer_question_passes_filters(
     mock_retrieve.assert_called_once_with(
         question="What is the financial outlook?",
         top_k=5,
+        similarity_threshold=0.70,
         date_start=2025,
         date_end=2025,
         content_type="Reports",
