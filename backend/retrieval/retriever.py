@@ -58,14 +58,23 @@ def retrieve_chunks(
     # --------------------------------------------------
     query = """
         SELECT
-            d.filename,
-            c.chunk_index,
-            c.content,
-            1 - (c.embedding <=> %s::vector) AS similarity
-        FROM chunks c
-        JOIN documents d
-            ON d.id = c.document_id
-    """
+        c.id AS chunk_id,
+        c.document_id,
+        c.chunk_index,
+        c.content,
+        c.page_start,
+        c.page_end,
+        d.title,
+        d.filename,
+        d.document_type,
+        d.author,
+        d.document_date,
+        d.topic,
+        1 - (c.embedding <=> %s::vector) AS similarity
+    FROM chunks c
+    JOIN documents d
+        ON d.id = c.document_id
+        """
 
     params = [embedding_string]
     conditions = []
@@ -159,10 +168,40 @@ def retrieve_chunks(
     # --------------------------------------------------
     # Remove low-relevance chunks
     # --------------------------------------------------
+# --------------------------------------------------
+# Remove low-relevance chunks
+# --------------------------------------------------
     results = [
-        result
-        for result in results
-        if result[3] >= similarity_threshold
-    ]
+    result
+    for result in results
+    if result[12] >= similarity_threshold
+]
 
-    return results
+
+# --------------------------------------------------
+# Format retrieved chunks with source metadata
+# --------------------------------------------------
+    formatted_results = []
+
+    for result in results:
+        formatted_results.append(
+        {
+            "chunk_id": result[0],
+            "document_id": result[1],
+            "chunk_index": result[2],
+            "content": result[3],
+            "page_start": result[4],
+            "page_end": result[5],
+            "similarity": result[12],
+            "metadata": {
+                "title": result[6],
+                "filename": result[7],
+                "document_type": result[8],
+                "author": result[9],
+                "document_date": result[10],
+                "topic": result[11]
+            }
+        }
+    )
+
+    return formatted_results

@@ -133,3 +133,45 @@ def filter_documents(
 
     finally:
         connection.close()
+
+
+def get_document_metadata(document_id: int):
+    connection = get_connection()
+
+    try:
+        cursor = connection.cursor()
+
+        cursor.execute(
+            """
+            SELECT
+                id,
+                title,
+                filename,
+                document_type,
+                author,
+                document_date,
+                topic
+            FROM documents
+            WHERE id = %s;
+            """,
+            (document_id,)
+        )
+
+        row = cursor.fetchone()
+
+        if row is None:
+            return None
+
+        return {
+            "id": row[0],
+            "title": row[1],
+            "filename": row[2],
+            "document_type": row[3],
+            "author": row[4],
+            "document_date": row[5],
+            "topic": row[6]
+        }
+
+    finally:
+        cursor.close()
+        connection.close()
