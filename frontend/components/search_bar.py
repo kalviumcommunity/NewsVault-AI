@@ -24,6 +24,8 @@ def render_search_bar():
             )
 
         with col2:
+            st.markdown("<div style='height: 29px;'></div>", unsafe_allow_html=True)
+
             search_clicked = st.button(
                 "▷ Search",
                 use_container_width=True,

@@ -19,7 +19,7 @@ st.set_page_config(
 # Default to 'filters' or preserve current
 # -----------------------------
 if "current_page" not in st.session_state:
-    st.session_state["current_page"] = "filters"
+    st.session_state["current_page"] = "home"
 
 if "search_query" not in st.session_state:
     st.session_state["search_query"] = "What did we report about Company X in 2018?"

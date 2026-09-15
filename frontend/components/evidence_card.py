@@ -1,12 +1,5 @@
+import html
 import streamlit as st
-
-
-def clean_html(html_str: str) -> str:
-    return " ".join(
-        line.strip()
-        for line in html_str.splitlines()
-        if line.strip()
-    )
 
 
 def render_evidence_modal(
@@ -17,8 +10,8 @@ def render_evidence_modal(
     relevance: str = "96%"
 ):
     """
-    Renders an evidence drawer/modal showing
-    the actual retrieved archive chunk.
+    Renders the evidence view showing the actual
+    retrieved archive chunk.
     """
 
     if not date_str:
@@ -27,54 +20,62 @@ def render_evidence_modal(
     if not relevance:
         relevance = "Match"
 
-    st.markdown(
-        clean_html(
-            f"""
-            <div class="evidence-modal-backdrop">
+    if not excerpt or not excerpt.strip():
+        excerpt = "No excerpt available."
 
-                <div class="evidence-modal-card">
+    # Escape dynamic text so document content cannot break the HTML.
+    safe_title = html.escape(str(source_title))
+    safe_badge = html.escape(str(badge_label))
+    safe_date = html.escape(str(date_str))
+    safe_relevance = html.escape(str(relevance))
+    safe_excerpt = html.escape(str(excerpt))
 
-                    <div class="evidence-modal-header">
+    evidence_html = f"""
+    <div class="evidence-modal-backdrop">
 
-                        <div>
-                            <span class="evidence-modal-badge">
-                                {badge_label}
-                            </span>
+        <div class="evidence-modal-card">
 
-                            <span class="evidence-modal-date">
-                                • {date_str}
-                            </span>
-                        </div>
+            <div class="evidence-modal-header">
 
-                        <div class="evidence-relevance-pill">
-                            Match: {relevance}
-                        </div>
+                <div>
+                    <span class="evidence-modal-badge">
+                        {safe_badge}
+                    </span>
 
-                    </div>
+                    <span class="evidence-modal-date">
+                        • {safe_date}
+                    </span>
+                </div>
 
-                    <h3 class="evidence-modal-title">
-                        {source_title}
-                    </h3>
-
-                    <div class="evidence-modal-body">
-
-                        <div class="evidence-quote-label">
-                            EXCERPT EVIDENCE:
-                        </div>
-
-                        <blockquote class="evidence-quote-box">
-                            "{excerpt}"
-                        </blockquote>
-
-                    </div>
-
+                <div class="evidence-relevance-pill">
+                    Match: {safe_relevance}
                 </div>
 
             </div>
-            """
-        ),
-        unsafe_allow_html=True
-    )
+
+            <h3 class="evidence-modal-title">
+                {safe_title}
+            </h3>
+
+            <div class="evidence-modal-body">
+
+                <div class="evidence-quote-label">
+                    EXCERPT EVIDENCE:
+                </div>
+
+                <blockquote class="evidence-quote-box">
+                    "{safe_excerpt}"
+                </blockquote>
+
+            </div>
+
+        </div>
+
+    </div>
+    """
+
+    # Render HTML directly instead of using st.markdown.
+    st.html(evidence_html)
 
     if st.button(
         "✕ Close Evidence View",
