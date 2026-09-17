@@ -442,7 +442,7 @@ NewsVault-AI/
 ## 1. Clone the Repository
 
 ```bash
-git clone <repository-url>
+git clone https://github.com/kalviumcommunity/NewsVault-AI.git
 cd NewsVault-AI
 ```
 
